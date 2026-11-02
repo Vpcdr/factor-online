@@ -103,7 +103,7 @@ body.pt #thermal{display:block;margin:0 auto;color:#000;font-family:Vazirmatn,Ta
   <button class="btn hb" data-go="profiles">🏪 پروفایل فروشنده</button>
   <button class="btn hb w" data-go="backup">💾 پشتیبان</button>
   <button class="btn hb w" data-go="license" style="grid-column:1/-1">🔑 فعال‌سازی لایسنس</button>
-  <button class="btn hb s" id="installBtn" style="grid-column:1/-1;display:none">📲 نصب برنامه روی گوشی</button>
+  <button class="btn hb s" id="installBtn" style="grid-column:1/-1">📲 آموزش نصب برنامه روی گوشی</button>
  </div>
 </section>
 
@@ -472,19 +472,13 @@ $('#adWipe').onclick=()=>ask('همه داده‌ها پاک شود؟ (لایسن
 /* ========= شروع ========= */
 document.addEventListener('DOMContentLoaded',()=>{updateLicenseStatusBadge();if(new URLSearchParams(location.search).get('admin')==='1')askAdmin()});
 if(document.readyState!=='loading')updateLicenseStatusBadge();
-/* ========= نصب برنامه از طریق مرورگر (PWA) ========= */
-let dip=null;
-const isStandalone=()=>matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;
-const showInstall=()=>{$('#installBtn').style.display=isStandalone()?'none':'block'};
-addEventListener('beforeinstallprompt',e=>{e.preventDefault();dip=e;showInstall()});
-addEventListener('appinstalled',()=>{dip=null;showInstall();toast('برنامه نصب شد ✓')});
-$('#installBtn').onclick=async()=>{
- /* داخل پیش‌نمایش (iframe) یا غیر HTTPS نصب ممکن نیست */
- if(top!==self||location.protocol!=='https:'){modal('<h3>نصب از این صفحه ممکن نیست</h3><p>آدرس زیر را مستقیم در Chrome (اندروید) یا Safari (آیفون) باز کنید و دکمه‌ی نصب را بزنید:</p><p dir="ltr" style="font-weight:800;word-break:break-all">https://vpcdr.github.io/factor-online/</p><button class="btn w full" onclick="closeModal()">بستن</button>');return}
- if(dip){try{dip.prompt();await dip.userChoice;dip=null;showInstall();return}catch(e){dip=null}}
- modal('<h3>نصب برنامه</h3><p><b>اندروید (Chrome):</b> منوی ⋮ بالای صفحه ← «نصب برنامه» یا «افزودن به صفحه اصلی».</p><p><b>آیفون (Safari):</b> دکمه اشتراک‌گذاری ⬆️ ← «Add to Home Screen».</p><button class="btn w full" onclick="closeModal()">بستن</button>');
-};
-showInstall();
+/* ========= آموزش نصب برنامه روی گوشی (دائمی) ========= */
+$('#installBtn').onclick=()=>modal(`<h3>📲 آموزش نصب برنامه روی گوشی</h3>
+<div class="item"><b>۱) باز کردن آدرس</b><div class="muted">آدرس زیر را مستقیم در مرورگر گوشی باز کنید (نه از داخل تلگرام یا برنامه‌های دیگر):</div><div dir="ltr" style="font-weight:800;word-break:break-all;margin-top:4px">https://vpcdr.github.io/factor-online/</div></div>
+<div class="item"><b>🤖 اندروید (Chrome)</b><div class="muted">۱. منوی سه‌نقطه ⋮ بالای صفحه را بزنید<br>۲. «نصب برنامه» یا «افزودن به صفحه اصلی» را انتخاب کنید<br>۳. «نصب» را تایید کنید<br>۴. آیکون F طلایی روی صفحه‌ی گوشی ساخته می‌شود</div></div>
+<div class="item"><b>🍎 آیفون (Safari)</b><div class="muted">۱. دکمه‌ی اشتراک‌گذاری ⬆️ پایین صفحه را بزنید<br>۲. «Add to Home Screen» را انتخاب کنید<br>۳. «Add» را بزنید</div></div>
+<div class="item"><b>✅ بعد از نصب</b><div class="muted">برنامه بدون نوار آدرس باز می‌شود. آپدیت‌ها خودکار می‌رسند و اطلاعات روی همان گوشی می‌ماند. برای انتقال اطلاعات به گوشی دیگر از «پشتیبان» استفاده کنید.</div></div>
+<button class="btn full" onclick="closeModal()">متوجه شدم</button>`);
 
 /* ثبت Service Worker برای نصب (PWA/APK) - فقط روی HTTPS */
 if('serviceWorker' in navigator&&location.protocol==='https:')addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));

@@ -11,9 +11,9 @@
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon-192.png">
 <link rel="icon" type="image/png" href="icon-192.png">
-<link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css?v=1.5.0" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js?v=1.5.0"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js?v=1.5.0"></script>
+<link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css?v=1.6.1" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js?v=1.6.1"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js?v=1.6.1"></script>
 <style>
 :root{--g:#B78C2E;--g2:#8B6914;--g3:#CDA143;--d:#0F4C3C;--d2:#1b6b55;--d3:#08301f;--bg:#F5F1E8;--line:#efe7d2;--line2:#e3dcc8;--soft:#fffdf8;--card:#fff;--ink:#1d2b26;--rad:20px;--ct:5px solid var(--g);--sh:0 10px 24px rgba(15,76,60,.12),0 2px 0 rgba(183,140,46,.25)}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -102,6 +102,12 @@ body.pt #thermal{display:block;margin:0 auto;color:#000;font-family:Vazirmatn,Ta
 :root[data-theme="trd-a"] body{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='none' stroke='%231B3A6B' stroke-opacity='.08' stroke-width='1.5'%3E%3Cpath d='M40 4c10 12 24 16 36 36-12 20-26 24-36 36C30 64 16 60 4 40 16 20 30 16 40 4z'/%3E%3Ccircle cx='40' cy='40' r='10'/%3E%3Cpath d='M40 30v20M30 40h20'/%3E%3C/g%3E%3C/svg%3E")}
 :root[data-theme="trd-b"]{--bg:#F3E7D6;--g:#A83A2F;--g2:#7A2820;--g3:#C45548;--d:#1D6B73;--d2:#2A8A93;--d3:#0F454B;--line:#E8D7BE;--line2:#D9C3A3;--soft:#FBF3E6;--ink:#33241C;--rad:12px;--ct:6px double var(--d);--sh:0 8px 20px rgba(122,40,32,.16),0 2px 0 rgba(29,107,115,.3)}
 :root[data-theme="trd-b"] body{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='none' stroke='%23A83A2F' stroke-opacity='.08' stroke-width='1.5'%3E%3Cpath d='M40 4c10 12 24 16 36 36-12 20-26 24-36 36C30 64 16 60 4 40 16 20 30 16 40 4z'/%3E%3Ccircle cx='40' cy='40' r='10'/%3E%3Cpath d='M40 30v20M30 40h20'/%3E%3C/g%3E%3C/svg%3E")}
+#ctoast{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:120;pointer-events:none}
+#ctoast span{background:rgba(15,76,60,.95);color:#fff;font-weight:800;font-size:19px;padding:18px 36px;border-radius:20px;box-shadow:0 12px 40px rgba(0,0,0,.35)}
+#sug{position:fixed;z-index:70;display:none;background:var(--card);border:2px solid var(--g);border-radius:12px;box-shadow:0 10px 24px rgba(0,0,0,.22);overflow:auto}
+#sug>div{padding:9px 12px;border-bottom:1px solid var(--line);cursor:pointer}#sug>div:last-child{border:0}#sug>div:active{background:var(--soft)}
+#instBar{position:fixed;left:10px;right:10px;bottom:calc(10px + env(safe-area-inset-bottom));display:none;align-items:center;gap:8px;background:var(--card);border:2px solid var(--g);border-radius:16px;padding:10px 12px;box-shadow:0 10px 30px rgba(0,0,0,.25);z-index:45}
+button.item{display:block;width:100%;font:inherit;text-align:right;color:inherit;cursor:pointer}
 </style><style id="pgs"></style>
 </head>
 <body>
@@ -109,19 +115,22 @@ body.pt #thermal{display:block;margin:0 auto;color:#000;font-family:Vazirmatn,Ta
 <header class="card">
  <div class="logo"><div class="circ"><svg viewBox="0 0 48 48" aria-label="F"><defs><linearGradient id="lgF" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E6C25E"/><stop offset=".55" stop-color="#B78C2E"/><stop offset="1" stop-color="#7A5A0E"/></linearGradient></defs><circle cx="24" cy="24" r="22.5" fill="url(#lgF)" stroke="#0F4C3C" stroke-width="2.5"/><circle cx="24" cy="24" r="17.5" fill="none" stroke="#fff" stroke-opacity=".5" stroke-width="1.2"/><ellipse cx="19" cy="11" rx="9" ry="4" fill="#fff" opacity=".22"/><text x="24" y="33.5" text-anchor="middle" font-family="Georgia,'Times New Roman',serif" font-weight="700" font-size="28" fill="#fff" stroke="#0F4C3C" stroke-width=".8" paint-order="stroke">F</text></svg></div><div><div class="title" id="ttl">فاکتور آنلاین</div><span id="badge" class="badge"></span></div></div>
  <div class="clock">📅 <span id="dt"></span></div>
- <div class="left"><span class="ver">ver1.5.0</span><span class="by">VPCDR</span></div>
+ <div class="left"><span class="ver">ver1.6.1</span><span class="by">VPCDR</span></div>
 </header>
 <div id="banner"></div>
 
 <section class="page show" id="p-home">
- <div id="bkNote"></div>
+ <div id="bkNote"></div><div id="remNote"></div>
  <div class="grid2">
   <button class="btn hb" id="newInv" data-go="invoice">🧾 فاکتور جدید</button>
   <button class="btn hb s" data-go="invoices">📂 لیست فاکتورها</button>
   <button class="btn hb s" data-go="customers">👥 مشتریان</button>
   <button class="btn hb s" data-go="products">📦 کالا و خدمات</button>
-  <button class="btn hb" data-go="profiles">🏪 پروفایل فروشنده</button>
+  <button class="btn hb" data-go="accounting">🧮 حسابداری</button>
   <button class="btn hb s" data-go="reports">📊 گزارش‌ها</button>
+  <button class="btn hb" data-go="reminders">⏰ یادآورها</button>
+  <button class="btn hb s" data-go="notes">📝 یادداشت‌ها</button>
+  <button class="btn hb" data-go="profiles">🏪 پروفایل فروشنده</button>
   <button class="btn hb w" data-go="backup">💾 پشتیبان</button>
   <button class="btn hb w" data-go="license" style="grid-column:1/-1">🔑 فعال‌سازی لایسنس</button>
   <button class="btn hb w" data-go="settings" style="grid-column:1/-1">⚙️ تنظیمات</button>
@@ -181,7 +190,7 @@ body.pt #thermal{display:block;margin:0 auto;color:#000;font-family:Vazirmatn,Ta
 </div></div></section>
 
 <section class="page" id="p-invoices"><div class="top"><button class="btn sm w" data-back>‹ بازگشت</button><button class="btn sm" data-home>🏠 صفحه اصلی</button><h2>لیست فاکتورها</h2></div>
- <div class="row"><input id="q_inv" placeholder="🔍 جستجو نام یا شماره"><select id="f_inv"><option value="">همه</option><option value="inv">فاکتور</option><option value="pro">پیش‌فاکتور</option><option value="paid">پرداخت شده</option><option value="unpaid">پرداخت نشده</option><option value="partial">جزئی</option></select></div><div id="ilist" style="margin-top:12px"></div></section>
+ <div class="row"><input id="q_inv" placeholder="🔍 جستجو در همه‌ی ماه‌ها (نام یا شماره)"><select id="f_inv"><option value="">همه</option><option value="inv">فاکتور</option><option value="pro">پیش‌فاکتور</option><option value="paid">پرداخت شده</option><option value="unpaid">پرداخت نشده</option><option value="partial">جزئی</option></select></div><div id="ilist" style="margin-top:12px"></div></section>
 <section class="page" id="p-customers"><div class="top"><button class="btn sm w" data-back>‹ بازگشت</button><button class="btn sm" data-home>🏠 صفحه اصلی</button><h2>دفترچه مشتریان</h2></div><div class="row"><input id="q_customers" placeholder="🔍 جستجو"><button class="btn sm" data-add="customers" style="flex:none">➕ جدید</button></div><div id="l_customers" style="margin-top:12px"></div></section>
 <section class="page" id="p-products"><div class="top"><button class="btn sm w" data-back>‹ بازگشت</button><button class="btn sm" data-home>🏠 صفحه اصلی</button><h2>بانک کالا و خدمات</h2></div><div class="row"><input id="q_products" placeholder="🔍 جستجو"><button class="btn sm" data-add="products" style="flex:none">➕ جدید</button></div><div id="l_products" style="margin-top:12px"></div></section>
 <section class="page" id="p-settings"><div class="top"><button class="btn sm w" data-back>‹ بازگشت</button><button class="btn sm" data-home>🏠 صفحه اصلی</button><h2>⚙️ تنظیمات</h2></div>
@@ -191,6 +200,33 @@ body.pt #thermal{display:block;margin:0 auto;color:#000;font-family:Vazirmatn,Ta
 <div class="card"><h3 style="margin-top:0">📲 نصب روی گوشی</h3><button class="btn full" id="installBtn">آموزش نصب برنامه روی گوشی</button></div>
 <div class="card"><h3 style="margin-top:0">📬 ارتباط با ما</h3><div class="item" style="display:flex;align-items:center;gap:10px"><b dir="ltr" style="flex:1;font-size:13px;word-break:break-all">V.goldypoor@gmail.com</b><button class="btn sm" data-copy="V.goldypoor@gmail.com">📋 کپی</button></div><div class="item" style="display:flex;align-items:center;gap:10px"><b dir="ltr" style="flex:1;font-size:13px;word-break:break-all">09371226509</b><button class="btn sm" data-copy="09371226509">📋 کپی</button></div></div>
 </section>
+<section class="page" id="p-accounting"><div class="top"><button class="btn sm w" data-back>‹ بازگشت</button><button class="btn sm" data-home>🏠 صفحه اصلی</button><h2>🧮 حسابداری ساده</h2></div>
+<label style="margin-top:0">حساب‌ها برای چه زمانی؟</label><select id="accPer"><option value="m">این ماه</option><option value="y">امسال</option><option value="all">از اول تا الان</option></select>
+<div id="accBody" style="margin-top:12px"></div>
+<details class="card"><summary style="font-weight:800;color:var(--d);cursor:pointer">📖 راهنما: حسابداری ساده یعنی چه؟</summary>
+<div style="line-height:2;margin-top:10px">
+<p>حسابداری ساده فقط جواب این چند سؤال است:</p>
+<p>🤝 <b>طلب من:</b> مشتری‌ها هنوز چقدر به من بدهکارند؟ (مبلغ فاکتور منهای پولی که داده‌اند)</p>
+<p>💰 <b>درآمد من:</b> چقدر فروخته‌ام؟ (مبلغ فاکتورها بعد از کم‌کردن تخفیف؛ مالیات جزو درآمد نیست)</p>
+<p>📥 <b>پولی که گرفته‌ام:</b> از این فروش چقدر واقعا به دستم رسیده؟</p>
+<p>🏭 <b>خرج خرید کالا (سرمایه):</b> کالاهایی را که فروخته‌ام، خودم چقدر خریده بودم؟</p>
+<p>📈 <b>سود من:</b> درآمد منهای خرج خرید.</p>
+<p>📦 <b>پول خوابیده در انبار:</b> کالاهایی که هنوز نفروخته‌ام چقدر می‌ارزند؟ (تعداد موجود × قیمت خرید)</p>
+<hr style="border:0;border-top:1px dashed var(--line2)">
+<p><b>یک مثال ساده:</b> ۱۰ عدد کالا که هر کدام را ۱ میلیون خریده‌اید، هر کدام را ۲ میلیون فروختید و روی کل فاکتور ۲ میلیون تخفیف دادید.<br>
+• درآمد: ۲۰ − ۲ = <b>۱۸ میلیون</b><br>
+• خرج خرید: ۱۰ × ۱ = <b>۱۰ میلیون</b><br>
+• سود: ۱۸ − ۱۰ = <b>۸ میلیون</b><br>
+• مشتری‌ها فقط ۱۵ میلیون داده‌اند ← پول گرفته‌شده <b>۱۵ میلیون</b> و طلب شما <b>۳ میلیون</b><br>
+• اگر ۵ عدد دیگر از همان کالا در انبار مانده باشد ← پول خوابیده در انبار <b>۵ میلیون</b></p>
+<hr style="border:0;border-top:1px dashed var(--line2)">
+<p><b>برای اینکه اعداد درست باشند:</b><br>۱) در «کالا و خدمات» برای هر کالا «قیمت خرید» و «موجودی» را بنویسید.<br>۲) در فاکتور، وضعیت پرداخت را درست بزنید و پرداخت‌های بعدی را با دکمه‌ی «💰 پرداخت» در لیست فاکتورها ثبت کنید.<br>۳) هفته‌ای یک‌بار این صفحه را ببینید.</p>
+<p class="muted">توجه: سود اینجا فقط تفاوت فروش و خرید کالاست؛ هزینه‌هایی مثل اجاره، حقوق و حمل‌ونقل از آن کم نشده است. پیش‌فاکتورها در این حساب‌ها نیستند. واحد پول همان است که در تنظیمات انتخاب کرده‌اید.</p></div></details>
+<button class="btn w full" id="accCsv">⬇️ فایل اکسل برای حسابدار</button></section>
+<section class="page" id="p-reminders"><div class="top"><button class="btn sm w" data-back>‹ بازگشت</button><button class="btn sm" data-home>🏠 صفحه اصلی</button><h2>⏰ یادآورها و برنامه‌ریزی</h2></div>
+<div class="card"><label>عنوان کار</label><input id="rm_t"><label>زمان</label><input id="rm_at" type="datetime-local"><label>توضیحات (اختیاری)</label><textarea id="rm_n" rows="2"></textarea><button class="btn full" id="rmAdd" style="margin-top:12px">➕ افزودن یادآور</button><button class="btn w full" id="rmPerm" style="margin-top:10px">🔔 فعال‌سازی اعلان</button></div><div id="rmList"></div></section>
+<section class="page" id="p-notes"><div class="top"><button class="btn sm w" data-back>‹ بازگشت</button><button class="btn sm" data-home>🏠 صفحه اصلی</button><h2>📝 یادداشت‌ها</h2></div>
+<div class="row"><input id="q_notes" placeholder="🔍 جستجو در عنوان و متن"><button class="btn sm" id="ntAdd" style="flex:none">➕ جدید</button></div><div id="ntList" style="margin-top:12px"></div></section>
 <section class="page" id="p-reports"><div class="top"><button class="btn sm w" data-back>‹ بازگشت</button><button class="btn sm" data-home>🏠 صفحه اصلی</button><h2>گزارش‌ها</h2></div><div id="repBody"></div></section>
 <section class="page" id="p-backup"><div class="top"><button class="btn sm w" data-back>‹ بازگشت</button><button class="btn sm" data-home>🏠 صفحه اصلی</button><h2>پشتیبان و بازیابی</h2></div><div class="card"><button class="btn full" id="bkSave">⬇️ دریافت فایل پشتیبان</button><button class="btn s full" id="bkShare" style="margin-top:12px">📤 ارسال پشتیبان (تلگرام، ایمیل، بله، ایتا ...)</button><p class="muted">اطلاعات فقط روی همین گوشی ذخیره می‌شود؛ هفته‌ای یک‌بار پشتیبان بگیرید.</p><label>بازیابی از فایل</label><input type="file" id="bkFile" accept=".json,.txt"></div></section>
 
@@ -205,15 +241,17 @@ body.pt #thermal{display:block;margin:0 auto;color:#000;font-family:Vazirmatn,Ta
 <div class="card"><h3 style="margin-top:0">لیست لایسنس‌ها</h3><div style="overflow:auto"><table><thead><tr><th>مشتری</th><th>کد کامل</th><th>تاریخ</th><th></th></tr></thead><tbody id="adList"></tbody></table></div></div>
 <div class="card"><label>دامنه مجاز</label><input id="ad_dom" dir="ltr"><div class="grid2" style="margin-top:12px"><button class="btn s" id="adTrial">ریست دوره آزمایشی</button><button class="btn r" id="adWipe">پاک کردن داده‌ها</button></div></div></section>
 
-<footer>Created by VPCDR . ver1.5.0</footer>
+<footer>Created by VPCDR . ver1.6.1</footer>
 </div>
 <div id="thermal"></div>
+<div id="sug"></div><div id="ctoast"><span></span></div>
+<div id="instBar"><div style="flex:1"><b>📲 نصب برنامه روی گوشی</b><div class="muted">مثل یک اپلیکیشن، با میانبر روی صفحه‌ی اصلی گوشی اجرا می‌شود.</div></div><button class="btn sm" id="instGo">نصب برنامه</button><button class="btn sm w" id="instLater">بعدا</button></div>
 <div id="modal"><div id="mbox"></div></div><div id="toast"></div>
 
 <script>
 /* ========= ابزارها ========= */
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
-const VER='ver1.5.0';
+const VER='ver1.6.1';
 const ld=(k,d)=>{try{const v=JSON.parse(localStorage.getItem(k));return v==null?d:v}catch(e){return d}};
 const sv=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
 const fa=n=>Number(n||0).toLocaleString('fa-IR');
@@ -226,7 +264,7 @@ function modal(html){$('#mbox').innerHTML=html;$('#modal').classList.add('show')
 function closeModal(){$('#modal').classList.remove('show')}
 $('#modal').addEventListener('click',e=>{if(e.target.id==='modal')closeModal()});
 function ask(msg,fn){modal(`<h3>${msg}</h3><div class="row"><button class="btn r" id="yes">بله</button><button class="btn w" onclick="closeModal()">انصراف</button></div>`);$('#yes').onclick=()=>{closeModal();fn()}}
-async function copy(t){try{await navigator.clipboard.writeText(t)}catch(e){const a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();document.execCommand('copy');a.remove()}toast('کپی شد ✓')}
+async function copy(t){try{await navigator.clipboard.writeText(t)}catch(e){const a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();document.execCommand('copy');a.remove()}ctoast('✓ کپی شد')}
 
 
 const setDate=()=>{$('#dt').textContent=jdate()};setDate();setInterval(setDate,6e4);
@@ -268,7 +306,7 @@ function go(id,back){
  setTimeout(()=>{o.classList.remove('show','out');n.classList.add('show','in');setTimeout(()=>n.classList.remove('in'),300);scrollTo(0,0)},200);
  cur=id;onEnter(id);
 }
-function onEnter(id){({profiles:renderProfiles,invoice:initInvoice,settings:renderSettings,invoices:renderInvoices,reports:renderReports,customers:()=>renderList('customers'),products:()=>renderList('products'),license:()=>$('#lcInfo').textContent='',admin:renderAdmin})[id]?.()}
+function onEnter(id){({profiles:renderProfiles,invoice:initInvoice,settings:renderSettings,accounting:renderAccounting,reminders:renderReminders,notes:renderNotes,home:()=>{showRemNote();showBkNote()},invoices:renderInvoices,reports:renderReports,customers:()=>renderList('customers'),products:()=>renderList('products'),license:()=>$('#lcInfo').textContent='',admin:renderAdmin})[id]?.()}
 document.addEventListener('click',e=>{
  if(e.target.closest('[data-home]')){hist=[];go('home',true);return}
  if(e.target.closest('[data-back]')){let t=hist.pop();while(t===cur&&hist.length)t=hist.pop();go(t&&t!==cur?t:'home',true);return}
@@ -361,8 +399,9 @@ function setNo(){$('#iv_no').value=label(nextSeq($('#iv_pro').checked),$('#iv_pr
 $('#iv_pro').onchange=()=>{$('#proBox').style.display=$('#iv_pro').checked?'block':'none';setNo()};
 function addRow(){
  const tr=document.createElement('tr');
- tr.innerHTML=`<td data-label="ردیف" class="rn"></td><td data-label="شرح کالا"><input class="d" list="dlProd" placeholder="شرح"></td><td data-label="تعداد"><input class="q" type="number" inputmode="decimal" value="1" min="0"></td><td data-label="قیمت واحد"><input class="p" type="number" inputmode="numeric" value="0" min="0"></td><td data-label="جمع ردیف" class="t">۰</td><td data-label="حذف"><button class="btn sm r" type="button">✕</button></td>`;
+ tr.innerHTML=`<td data-label="ردیف" class="rn"></td><td data-label="شرح کالا"><input class="d" placeholder="شرح (با تایپ، کالا پیشنهاد می‌شود)"></td><td data-label="تعداد"><input class="q" type="number" inputmode="decimal" value="1" min="0"></td><td data-label="قیمت واحد"><input class="p" type="number" inputmode="numeric" value="0" min="0"></td><td data-label="جمع ردیف" class="t">۰</td><td data-label="حذف"><button class="btn sm r" type="button">✕</button></td>`;
  tr.querySelector('button').onclick=()=>{tr.remove();calc()};
+ {const di=tr.querySelector('.d');di.autocomplete='off';di.oninput=di.onfocus=()=>showSug(di);di.onblur=()=>setTimeout(hideSug,150)}
  tr.querySelector('.d').onchange=e=>{const p=ld('products',[]).find(x=>x.name===e.target.value);if(p){tr.querySelector('.p').value=p.sell||0;calc()}};
  $('#rows').appendChild(tr);calc();
 }
@@ -384,26 +423,40 @@ $('#iv_dp').oninput=()=>{lastDisc='p';calc()};$('#iv_da').oninput=()=>{lastDisc=
 $('#iv_cn').onchange=()=>{const c=ld('customers',[]).find(x=>x.name===$('#iv_cn').value);if(c){$('#iv_cm').value=c.mobile||'';$('#iv_cj').value=c.job||'';$('#iv_ca').value=c.address||'';$('#iv_cb').value=c.balance||0}};
 function collect(){
  const t=calc(),pro=$('#iv_pro').checked,p=profiles[+$('#iv_prof').value]||{};
- const items=$$('#rows tr').map(tr=>({d:tr.querySelector('.d').value.trim(),q:num(tr.querySelector('.q').value),p:num(tr.querySelector('.p').value)})).filter(x=>x.d||x.p);
+ const items=$$('#rows tr').map(tr=>({d:tr.querySelector('.d').value.trim(),q:num(tr.querySelector('.q').value),p:num(tr.querySelector('.p').value)})).filter(x=>x.d||x.p).map(x=>({...x,b:((ld('products',[]).find(p=>p.name===x.d))||{}).buy||0}));
  return{id:uid(),pro,seq:nextSeq(pro),no:$('#iv_no').value,date:Date.now(),dateFa:jdate(),seller:p,
  cust:{name:$('#iv_cn').value.trim(),mobile:$('#iv_cm').value.trim(),job:$('#iv_cj').value.trim(),address:$('#iv_ca').value.trim(),balance:num($('#iv_cb').value)},
  items,sub:t.sub,disc:t.disc,tax:num($('#iv_tax').value),fin:t.fin,status:$('#iv_st').value,paid:t.paid,rem:t.rem,
  note:$('#iv_note').value,terms:$('#iv_terms').value,stamp:$('#iv_stamp').checked,valid:pro?num($('#iv_valid').value):0,cur:SET.cur};
 }
 function paper(v){
- const s=v.seller||{},img=s.stamp||s.logo,st={paid:'پرداخت شده',unpaid:'پرداخت نشده',partial:'تسویه جزئی'}[v.status];
- return `<div class="paper"><div style="display:flex;justify-content:space-between;align-items:center;border-bottom:3px solid #B78C2E;padding-bottom:10px">
- <div style="display:flex;gap:10px;align-items:center">${s.logo?`<img src="${s.logo}" style="width:64px;height:64px;object-fit:contain">`:''}<div><b style="font-size:18px;color:#0F4C3C">${esc(s.name)}</b><div>${esc(s.job)} · ${esc(s.mobile)}</div></div></div>
- <div style="text-align:left"><b style="color:#0F4C3C">${v.pro?'پیش‌فاکتور':'فاکتور فروش'}</b><div dir="ltr">${esc(v.no)}</div><div>${esc(v.dateFa)}</div></div></div>
- <p><b>مشتری:</b> ${esc(v.cust.name)} ${v.cust.mobile?'· '+esc(v.cust.mobile):''} ${v.cust.address?'· '+esc(v.cust.address):''}</p>
- <table><thead><tr><th>#</th><th>شرح</th><th>تعداد</th><th>قیمت واحد</th><th>جمع</th></tr></thead><tbody>${v.items.map((x,i)=>`<tr><td>${fa(i+1)}</td><td>${esc(x.d)}</td><td>${fa(x.q)}</td><td>${fa(x.p)}</td><td>${fa(x.q*x.p)}</td></tr>`).join('')}</tbody></table>
- <div>جمع کل: <b>${fa(v.sub)}</b> · تخفیف: <b>${fa(v.disc)}</b> · مالیات: <b>${fa(v.tax)}%</b></div>
- <div style="font-size:18px;margin:8px 0;color:#0F4C3C"><b>مبلغ نهایی: ${fa(v.fin)} ${cn(v.cur)}</b></div><div>${words(v.fin)} ${cn(v.cur)}</div>
- <div style="margin-top:6px">وضعیت: <b>${st}</b> · پرداخت‌شده: ${fa(v.paid)} · مانده: ${fa(v.rem)}</div>
- ${v.pro?`<div>اعتبار پیش‌فاکتور: ${fa(v.valid)} روز</div>`:''}
- ${s.card?`<div dir="rtl">کارت: <span dir="ltr">${esc(s.card)}</span> ${s.sheba?' · شبا: <span dir="ltr">'+esc(s.sheba)+'</span>':''}</div>`:''}
- ${v.note?`<p>توضیحات: ${esc(v.note)}</p>`:''}${v.terms?`<p>شرایط پرداخت: ${esc(v.terms)}</p>`:''}
- ${v.stamp&&img?`<img class="stamp" src="${img}">`:''}</div>`;
+ const s=v.seller||{},img=s.stamp||s.logo,U=cn(v.cur),stt={paid:'پرداخت شده',unpaid:'پرداخت نشده',partial:'تسویه جزئی'}[v.status];
+ /* لوگو و مهر با background-image تا در عکس و PDF همیشه نمایش داده شوند */
+ const bgi=(u,w,h,x='')=>`<div style="width:${w}px;height:${h}px;background-image:url('${u}');background-repeat:no-repeat;background-position:center;background-size:contain;flex:none;${x}"></div>`;
+ const box=(t,b)=>`<div style="flex:1;min-width:210px;border:1px solid #e3dcc8;border-radius:10px;padding:10px 12px"><div style="font-weight:800;color:#0F4C3C;border-bottom:2px solid #B78C2E;display:inline-block;margin-bottom:6px;padding-bottom:2px">${t}</div><div style="line-height:1.9">${b}</div></div>`;
+ const ln=(a,b)=>b?`<div><span style="color:#777">${a}:</span> ${esc(b)}</div>`:'';
+ const row=(a,b,x='')=>`<div style="display:flex;justify-content:space-between;gap:8px;padding:7px 12px;border-bottom:1px solid #eee;${x}"><span>${a}</span><b>${b}</b></div>`;
+ const th=h=>`<th style="background:#0F4C3C;color:#fff;padding:8px;font-size:13px">${h}</th>`;
+ const td=(t,x='')=>`<td style="padding:8px;border-bottom:1px solid #eee;${x}">${t}</td>`;
+ return `<div class="paper" style="padding:0;overflow:hidden;display:flex;flex-direction:column">
+ <div style="background:#0F4C3C;color:#fff;padding:18px 22px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;border-bottom:4px solid #B78C2E">
+  <div style="display:flex;align-items:center;gap:12px">${s.logo?bgi(s.logo,70,70,'background-color:#fff;border-radius:12px;border:2px solid #B78C2E'):''}<div><div style="font-size:20px;font-weight:800">${esc(s.name)}</div><div style="opacity:.9">${esc(s.job)}</div></div></div>
+  <div style="text-align:left"><div style="font-size:22px;font-weight:800;color:#E6C25E">${v.pro?'پیش‌فاکتور':'فاکتور فروش'}</div><div>شماره: <b dir="ltr">${esc(v.no)}</b></div><div>تاریخ: ${esc(v.dateFa)}</div></div></div>
+ <div style="padding:18px 22px;flex:1">
+  <div style="display:flex;gap:12px;flex-wrap:wrap">${box('فروشنده',ln('نام',s.name)+ln('شغل',s.job)+ln('موبایل',s.mobile)+ln('آدرس',s.address))}${box('خریدار',ln('نام',v.cust.name)+ln('موبایل',v.cust.mobile)+ln('شغل',v.cust.job)+ln('آدرس',v.cust.address))}</div>
+  <div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;margin:14px 0"><thead><tr>${['ردیف','شرح کالا / خدمات','تعداد','قیمت واحد ('+U+')','جمع ('+U+')'].map(th).join('')}</tr></thead><tbody>${v.items.map((x,i)=>`<tr style="background:${i%2?'#faf6ea':'#fff'}">${td(fa(i+1),'text-align:center')}${td(esc(x.d))}${td(fa(x.q),'text-align:center')}${td(fa(x.p),'text-align:center')}${td(fa(x.q*x.p),'text-align:center;font-weight:700')}</tr>`).join('')}</tbody></table></div>
+  <div style="display:flex;gap:14px;flex-wrap:wrap;align-items:flex-start">
+   <div style="flex:1;min-width:220px;line-height:1.9">
+    <div><b style="color:#0F4C3C">مبلغ به حروف:</b> ${words(v.fin)} ${U}</div>
+    <div><b style="color:#0F4C3C">وضعیت پرداخت:</b> ${stt} · پرداخت‌شده: ${fa(v.paid)} · مانده: ${fa(v.rem)} ${U}</div>
+    ${v.pro?`<div><b style="color:#0F4C3C">اعتبار پیش‌فاکتور:</b> ${fa(v.valid)} روز</div>`:''}
+    ${s.card?`<div><b style="color:#0F4C3C">شماره کارت:</b> <span dir="ltr">${esc(s.card)}</span></div>`:''}${s.sheba?`<div><b style="color:#0F4C3C">شبا:</b> <span dir="ltr">${esc(s.sheba)}</span></div>`:''}
+   </div>
+   <div style="width:270px;max-width:100%;border:1px solid #e3dcc8;border-radius:10px;overflow:hidden">${row('جمع کل',fa(v.sub)+' '+U)}${row('تخفیف',fa(v.disc)+' '+U)}${row('مالیات',fa(v.tax)+'٪')}${row('مبلغ نهایی',fa(v.fin)+' '+U,'background:#B78C2E;color:#fff;font-size:15px;border:0')}</div>
+  </div>
+  ${v.note?`<div style="margin-top:12px;border:1px solid #e3dcc8;border-radius:10px;padding:8px 12px"><b style="color:#0F4C3C">توضیحات:</b> ${esc(v.note)}</div>`:''}${v.terms?`<div style="margin-top:8px;border:1px solid #e3dcc8;border-radius:10px;padding:8px 12px"><b style="color:#0F4C3C">شرایط پرداخت:</b> ${esc(v.terms)}</div>`:''}
+ </div>
+ ${v.stamp&&img?`<div style="display:flex;justify-content:space-between;align-items:flex-end;gap:12px;padding:0 22px 16px;border-top:1px dashed #ddd;margin:0 22px;padding-top:10px"><div style="text-align:center;min-width:150px;color:#777;font-size:12px">امضای خریدار<div style="height:100px"></div></div><div style="text-align:center;color:#777;font-size:12px">مهر و امضای فروشنده<div style="display:flex;justify-content:center">${bgi(img,130,110,'opacity:.92;transform:rotate(-12deg)')}</div></div></div>`:'<div style="height:20px"></div>'}</div>`;
 }
 function validateInv(v){if(!v.cust.name){toast('نام مشتری را وارد کنید');return false}if(!v.items.length){toast('حداقل یک قلم وارد کنید');return false}return true}
 $('#bPrev').onclick=()=>{const v=collect();if(validateInv(v))modal(paper(v)+'<button class="btn w full" onclick="closeModal()" style="margin-top:10px">بستن</button>')};
@@ -418,13 +471,25 @@ $('#bSave').onclick=()=>{
  if(all.some(x=>x.no===v.no)){toast('شماره تکراری است');return}
  applyFx(v,1);all.push(v);sv(k,all);toast('ذخیره شد ✓ '+v.no);setNo();
 };
-$('#bSms').onclick=()=>{const v=collect();copy(`${v.pro?'پیش‌فاکتور':'فاکتور'} ${v.no}\nمشتری: ${v.cust.name}\nمبلغ نهایی: ${fa(v.fin)} ${cn(v.cur)}\nمانده: ${fa(v.rem)} ${cn(v.cur)}\n${v.seller.name||''} ${v.seller.mobile||''}`)};
+$('#bSms').onclick=()=>{const v=collect();copy(smsText(v))};
 async function capture(v){
- const d=document.createElement('div');d.style.cssText='position:fixed;left:-9999px;top:0;width:720px';d.innerHTML=paper(v);document.body.appendChild(d);
- try{await document.fonts.ready;return await html2canvas(d.firstChild,{scale:2,backgroundColor:'#fff',useCORS:true})}finally{d.remove()}
+ const d=document.createElement('div');d.style.cssText='position:fixed;left:-9999px;top:0;width:794px';d.innerHTML=paper(v);d.firstChild.style.minHeight='1123px';document.body.appendChild(d);
+ try{await document.fonts.ready;await new Promise(r=>setTimeout(r,150));return await html2canvas(d.firstChild,{scale:2,backgroundColor:'#fff',useCORS:true})}finally{d.remove()}
 }
-$('#bPdf').onclick=async()=>{const v=collect();if(!validateInv(v))return;try{const c=await capture(v),P=new window.jspdf.jsPDF('p','mm','a4');let w=210,h=c.height*w/c.width;if(h>297){w=w*297/h;h=297}P.addImage(c.toDataURL('image/jpeg',.92),'JPEG',(210-w)/2,0,w,h);P.save(`factor-${v.no}.pdf`)}catch(e){toast('خطا در ساخت PDF')}};
-$('#bImg').onclick=async()=>{const v=collect();if(!validateInv(v))return;try{const c=await capture(v),a=document.createElement('a');a.href=c.toDataURL('image/png');a.download=`factor-${v.no}.png`;a.click()}catch(e){toast('خطا در ساخت عکس')}};
+/* انتخاب نمایش مهر در خروجی عکس و PDF */
+function askStamp(v,cb){
+ const s=v.seller||{};if(!(s.stamp||s.logo)){cb({...v,stamp:false});return}
+ modal('<h3>مهر و امضا در خروجی نمایش داده شود؟</h3><div class="row"><button class="btn" id="stY">با مهر</button><button class="btn w" id="stN">بدون مهر</button></div><button class="btn w full" style="margin-top:10px" onclick="closeModal()">انصراف</button>');
+ $('#stY').onclick=()=>{closeModal();cb({...v,stamp:true})};$('#stN').onclick=()=>{closeModal();cb({...v,stamp:false})};
+}
+async function makePdf(v){
+ try{const c=await capture(v),P=new window.jspdf.jsPDF('p','mm','a4'),pw=210,pxP=Math.floor(c.width*297/pw);
+  for(let y=0,i=0;y<c.height;y+=pxP,i++){const h=Math.min(pxP,c.height-y),t=document.createElement('canvas');t.width=c.width;t.height=h;const x=t.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,t.width,h);x.drawImage(c,0,y,c.width,h,0,0,c.width,h);if(i)P.addPage();P.addImage(t.toDataURL('image/jpeg',.95),'JPEG',0,0,pw,h*pw/c.width)}
+  P.save(`factor-${v.no}.pdf`)}catch(e){toast('خطا در ساخت PDF')}
+}
+async function makeImg(v){try{const c=await capture(v),a=document.createElement('a');a.href=c.toDataURL('image/png');a.download=`factor-${v.no}.png`;a.click()}catch(e){toast('خطا در ساخت عکس')}}
+$('#bPdf').onclick=()=>{const v=collect();if(validateInv(v))askStamp(v,makePdf)};
+$('#bImg').onclick=()=>{const v=collect();if(validateInv(v))askStamp(v,makeImg)};
 
 /* ========= چاپ حرارتی (رسید ۵۸ یا ۸۰ میلی‌متر) ========= */
 function thermalHTML(v){
@@ -491,7 +556,8 @@ function fillForm(v){
  $('#rows').innerHTML='';v.items.forEach(it=>{addRow();const tr=$('#rows').lastChild;tr.querySelector('.d').value=it.d;tr.querySelector('.q').value=it.q;tr.querySelector('.p').value=it.p});if(!v.items.length)addRow();
  lastDisc='a';$('#iv_da').value=v.disc;$('#iv_tax').value=v.tax;$('#iv_st').value=v.status;$('#iv_paid').value=v.paid;$('#iv_note').value=v.note||'';$('#iv_terms').value=v.terms||'';$('#iv_stamp').checked=!!v.stamp;calc();
 }
-async function shareInv(v){
+function shareInv(v){askStamp(v,doShare)}
+async function doShare(v){
  try{const c=await capture(v),blob=await new Promise(r=>c.toBlob(r,'image/png')),f=new File([blob],`factor-${v.no}.png`,{type:'image/png'});
   if(navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({files:[f],title:v.no});return}
   const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=f.name;a.click();toast('عکس دانلود شد؛ از گالری بفرستید')}
@@ -500,21 +566,49 @@ async function shareInv(v){
 $('#bShare').onclick=()=>{const v=collect();if(validateInv(v))shareInv(v)};
 
 /* ========= لیست فاکتورها ========= */
+/* ===== بایگانی: سال ← ماه ← فاکتورها ===== */
+let arc={y:null,m:null};
+const MN=['فروردین','اردیبهشت','خرداد','تیر','مرداد','شهریور','مهر','آبان','آذر','دی','بهمن','اسفند'];
+const pn=n=>String(n).replace(/\d/g,d=>'۰۱۲۳۴۵۶۷۸۹'[d]);
+function invCard(x){return `<div class="item"><div class="row"><b dir="ltr" style="flex:none">${esc(x.no)}</b><span>${esc(x.cust.name)}</span><b style="flex:none">${fa(x.fin)} ${cn(x.cur)}</b></div><div class="muted">${esc(x.dateFa)} · ${x.pro?'پیش‌فاکتور':{paid:'پرداخت شده',unpaid:'پرداخت نشده',partial:'جزئی'}[x.status]}${!x.pro&&x.rem>0?' · مانده '+fa(x.rem):''}</div>
+ <div class="row" style="margin-top:8px"><button class="btn sm s" data-v="${x.id}">👁</button><button class="btn sm s" data-ed="${x.id}">✏️</button><button class="btn sm w" data-c="${x.id}">📋</button><button class="btn sm s" data-p="${x.id}">🖨</button><button class="btn sm w" data-sh="${x.id}">📤</button><button class="btn sm w" data-sm="${x.id}">💬</button>${!x.pro&&x.rem>0?`<button class="btn sm" data-pay="${x.id}">💰 پرداخت</button>`:''}${x.pro?`<button class="btn sm" data-t="${x.id}">تبدیل</button>`:''}<button class="btn sm r" data-x="${x.id}">🗑</button></div></div>`}
+const grpCard=(attr,val,title,n,sum)=>`<button class="item" ${attr}="${val}" style="width:100%;font:inherit;text-align:right;display:flex;justify-content:space-between;align-items:center;gap:8px;cursor:pointer;color:inherit"><b style="font-size:15px;color:var(--d)">${title}</b><span class="muted">${fa(n)} فاکتور · ${fa(sum)} ${CUR()}</span></button>`;
+function arcClick(D){
+ if(D.ay){arc.y=+D.ay;arc.m=null}else if(D.am){arc.m=+D.am}else if(D.ab==='y'){arc={y:null,m:null}}else if(D.ab==='m'){arc.m=null}else return false;
+ renderInvoices();return true;
+}
 function renderInvoices(){
  const q=$('#q_inv').value.trim(),f=$('#f_inv').value;
  let all=[...ld('invoices',[]).map(x=>({...x,pro:false})),...ld('proformas',[]).map(x=>({...x,pro:true}))].sort((a,b)=>b.date-a.date);
- all=all.filter(x=>(!q||x.no.toLowerCase().includes(q.toLowerCase())||x.cust.name.includes(q))&&(!f||(f==='inv'?!x.pro:f==='pro'?x.pro:x.status===f)));
- $('#ilist').innerHTML=all.map(x=>`<div class="item"><div class="row"><b dir="ltr" style="flex:none">${esc(x.no)}</b><span>${esc(x.cust.name)}</span><b style="flex:none">${fa(x.fin)} ${cn(x.cur)}</b></div><div class="muted">${esc(x.dateFa)} · ${x.pro?'پیش‌فاکتور':{paid:'پرداخت شده',unpaid:'پرداخت نشده',partial:'جزئی'}[x.status]}${!x.pro&&x.rem>0?' · مانده '+fa(x.rem):''}</div>
- <div class="row" style="margin-top:8px"><button class="btn sm s" data-v="${x.id}">👁</button><button class="btn sm s" data-ed="${x.id}">✏️</button><button class="btn sm w" data-c="${x.id}">📋</button><button class="btn sm s" data-p="${x.id}">🖨</button><button class="btn sm w" data-sh="${x.id}">📤</button>${!x.pro&&x.rem>0?`<button class="btn sm" data-pay="${x.id}">💰 پرداخت</button>`:''}${x.pro?`<button class="btn sm" data-t="${x.id}">تبدیل</button>`:''}<button class="btn sm r" data-x="${x.id}">🗑</button></div></div>`).join('')||'<p class="muted">موردی یافت نشد</p>';
+ /* با جستجو یا فیلتر: نمایش یکجا در همه‌ی ماه‌ها */
+ if(q||f){
+  all=all.filter(x=>(!q||x.no.toLowerCase().includes(q.toLowerCase())||x.cust.name.includes(q))&&(!f||(f==='inv'?!x.pro:f==='pro'?x.pro:x.status===f)));
+  $('#ilist').innerHTML=all.map(invCard).join('')||'<p class="muted">موردی یافت نشد</p>';return;
+ }
+ const G=all.map(x=>({x,...pd(x.date)})),sum=a=>a.reduce((t,g)=>t+(g.x.pro?0:g.x.fin),0);
+ const bar=(t,back)=>`<div class="row" style="margin-bottom:10px;align-items:center"><button class="btn sm w" data-ab="y" style="flex:none">‹ همه‌ی سال‌ها</button>${back}<b style="flex:2;color:var(--d)">${t}</b></div>`;
+ let h='';
+ if(arc.y==null){
+  const ys=[...new Set(G.map(g=>g.y))].sort((a,b)=>b-a);
+  h=ys.map(y=>{const L=G.filter(g=>g.y===y);return grpCard('data-ay',y,'📅 سال '+pn(y),L.length,sum(L))}).join('')||'<p class="muted">هنوز فاکتوری ثبت نشده</p>';
+ }else if(arc.m==null){
+  const L0=G.filter(g=>g.y===arc.y),ms=[...new Set(L0.map(g=>g.m))].sort((a,b)=>b-a);
+  h=bar('سال '+pn(arc.y),'')+(ms.map(m=>{const L=L0.filter(g=>g.m===m);return grpCard('data-am',m,'🗂 '+MN[m-1],L.length,sum(L))}).join('')||'<p class="muted">—</p>');
+ }else{
+  const L=G.filter(g=>g.y===arc.y&&g.m===arc.m);
+  h=bar(MN[arc.m-1]+' '+pn(arc.y),`<button class="btn sm w" data-ab="m" style="flex:none">‹ سال ${pn(arc.y)}</button>`)+(L.map(g=>invCard(g.x)).join('')||'<p class="muted">فاکتوری نیست</p>');
+ }
+ $('#ilist').innerHTML=h;
 }
 $('#q_inv').oninput=$('#f_inv').onchange=renderInvoices;
 $('#ilist').onclick=e=>{
- const b=e.target.closest('button');if(!b)return;const D=b.dataset,id=D.v||D.ed||D.c||D.t||D.x||D.p||D.sh||D.pay;
+ const b=e.target.closest('button');if(!b)return;if(arcClick(b.dataset))return;const D=b.dataset,id=D.v||D.ed||D.c||D.t||D.x||D.p||D.sh||D.pay||D.sm;
  const pk=ld('proformas',[]).some(x=>x.id===id)?'proformas':'invoices',all=ld(pk,[]),v=all.find(x=>x.id===id);if(!v)return;
  if(D.v)modal(paper(v)+'<button class="btn w full" onclick="closeModal()" style="margin-top:10px">بستن</button>');
  if(D.ed){editing={k:pk,id};go('invoice')}
  if(D.p)thermal(v);
  if(D.sh)shareInv(v);
+ if(D.sm)copy(smsText(v));
  if(D.x)ask('این مورد حذف شود؟',()=>{applyFx(v,-1);sv(pk,all.filter(x=>x.id!==id));renderInvoices()});
  if(D.pay){
   modal(`<h3>ثبت پرداخت (مانده: ${fa(v.rem)} ${cn(v.cur)})</h3><input id="payA" type="number" inputmode="numeric" value="${v.rem}"><div class="row" style="margin-top:12px"><button class="btn" id="payOk">ثبت</button><button class="btn w" onclick="closeModal()">انصراف</button></div>`);
@@ -535,21 +629,23 @@ function pd(ms){const p=new Intl.DateTimeFormat('en-US-u-ca-persian-nu-latn',{ye
 const dk=ms=>{const o=pd(ms);return o.y+'-'+o.m+'-'+o.d},mk=ms=>{const o=pd(ms);return o.y+'-'+o.m};
 function renderReports(){
  const I=ld('invoices',[]),now=Date.now(),sum=a=>a.reduce((t,x)=>t+x.fin,0);
- const td=I.filter(x=>dk(x.date)===dk(now)),mo=I.filter(x=>mk(x.date)===mk(now)),unpaid=I.reduce((t,x)=>t+(x.rem||0),0);
+ const td=I.filter(x=>dk(x.date)===dk(now)),mo=I.filter(x=>mk(x.date)===mk(now)),yr=I.filter(x=>pd(x.date).y===pd(now).y);
+ const open=ld('proformas',[]).filter(x=>x.date+(x.valid||0)*864e5>=now).length;
  const dayF=new Intl.DateTimeFormat('fa-IR-u-ca-persian',{weekday:'long',day:'numeric',month:'long'});
- const days=[];for(let i=0;i<7;i++){const t=now-i*864e5,L=I.filter(x=>dk(x.date)===dk(t));days.push(`<div class="row"><span>${dayF.format(t)}</span><b>${fa(sum(L))}</b></div>`)}
+ const dv=[];for(let i=0;i<7;i++){const t=now-i*864e5;dv.push({l:dayF.format(t),v:sum(I.filter(x=>dk(x.date)===dk(t)))})}
+ const mx=Math.max(1,...dv.map(d=>d.v));
+ const bars=dv.map(d=>`<div style="display:flex;align-items:center;gap:8px;margin:7px 0"><span style="width:96px;font-size:12px">${d.l}</span><div style="flex:1;background:var(--line);border-radius:8px;height:14px"><div style="width:${Math.round(d.v/mx*100)}%;background:var(--g);height:100%;border-radius:8px"></div></div><b style="font-size:12px;min-width:84px;text-align:left">${fa(d.v)}</b></div>`).join('');
  const pm={},cm={};I.forEach(x=>{cm[x.cust.name]=(cm[x.cust.name]||0)+x.fin;x.items.forEach(i=>{const o=pm[i.d]=pm[i.d]||{q:0,t:0};o.q+=i.q;o.t+=i.q*i.p})});
  const top=(o,f)=>Object.entries(o).sort((a,b)=>f(b[1])-f(a[1])).slice(0,5);
- const L=a=>a.length?a.join(''):'<div class="muted">—</div>';
- const debt=ld('customers',[]).filter(c=>c.balance>0).sort((a,b)=>b.balance-a.balance);
+ const L=a=>a.length?a.join(''):'<div class="muted">هنوز اطلاعاتی نیست</div>';
  const low=ld('products',[]).filter(p=>(p.tr||p.stock>0)&&p.stock<=3);
- $('#repBody').innerHTML=`<div class="grid2"><div class="item" style="margin:0"><div class="muted">فروش امروز (${fa(td.length)} فاکتور)</div><b style="font-size:15px">${fa(sum(td))}</b></div><div class="item" style="margin:0"><div class="muted">فروش این ماه (${fa(mo.length)} فاکتور)</div><b style="font-size:15px">${fa(sum(mo))}</b></div></div>
- <div class="item" style="margin-top:10px"><div class="muted">جمع مانده فاکتورها (پرداخت‌نشده)</div><b style="font-size:15px">${fa(unpaid)} ${CUR()}</b></div>
- <div class="card"><h3 style="margin-top:0">فروش ۷ روز اخیر</h3>${days.join('')}</div>
- <div class="card"><h3 style="margin-top:0">پرفروش‌ترین کالاها</h3>${L(top(pm,o=>o.q).map(a=>`<div class="row"><span>${esc(a[0])}</span><span>${fa(a[1].q)} عدد</span><b>${fa(a[1].t)}</b></div>`))}</div>
- <div class="card"><h3 style="margin-top:0">بهترین مشتریان</h3>${L(top(cm,o=>o).map(a=>`<div class="row"><span>${esc(a[0])}</span><b>${fa(a[1])}</b></div>`))}</div>
- <div class="card"><h3 style="margin-top:0">بدهکاران</h3>${L(debt.map(c=>`<div class="row"><span>${esc(c.name)}</span><b>${fa(c.balance)}</b></div>`))}</div>
- <div class="card"><h3 style="margin-top:0">کالاهای کم‌موجودی / تمام‌شده</h3>${L(low.map(p=>`<div class="row"><span>${esc(p.name)}</span><b>${fa(p.stock)}</b></div>`))}</div>`;
+ const k=(a,b,c)=>`<div class="item" style="margin:0"><div class="muted">${a}</div><b style="font-size:15px">${b}</b>${c?`<div class="muted">${c}</div>`:''}</div>`;
+ $('#repBody').innerHTML=`<div class="grid2">${k('فروش امروز',fa(sum(td))+' '+CUR(),fa(td.length)+' فاکتور')}${k('فروش این ماه',fa(sum(mo))+' '+CUR(),fa(mo.length)+' فاکتور')}${k('فروش امسال',fa(sum(yr))+' '+CUR(),fa(yr.length)+' فاکتور')}${k('پیش‌فاکتورهای باز',fa(open),'هنوز معتبر و تبدیل‌نشده')}</div>
+ <div class="card" style="margin-top:12px"><h3 style="margin-top:0">📅 فروش ۷ روز اخیر</h3>${bars}</div>
+ <div class="card"><h3 style="margin-top:0">🏆 پرفروش‌ترین کالاها</h3>${L(top(pm,o=>o.q).map(a=>`<div class="row"><span>${esc(a[0])}</span><span class="muted" style="flex:none">${fa(a[1].q)} عدد</span><b style="flex:none">${fa(a[1].t)}</b></div>`))}</div>
+ <div class="card"><h3 style="margin-top:0">⭐ بهترین مشتریان</h3>${L(top(cm,o=>o).map(a=>`<div class="row"><span>${esc(a[0])}</span><b style="flex:none">${fa(a[1])}</b></div>`))}</div>
+ <div class="card"><h3 style="margin-top:0">📦 کالاهای رو به اتمام</h3>${L(low.map(p=>`<div class="row"><span>${esc(p.name)}</span><b style="flex:none;color:${p.stock<=0?'#b3261e':'inherit'}">${p.stock<=0?'تمام شده':fa(p.stock)+' عدد مانده'}</b></div>`))}</div>
+ <button class="btn s full" data-go="accounting">🧮 طلب‌ها، درآمد و سود را در «حسابداری» ببینید</button>`;
 }
 
 /* ========= مشتریان و کالاها ========= */
@@ -577,12 +673,12 @@ function form(k,id){
 }
 
 /* ========= پشتیبان ========= */
-const KEYS=['profiles','activeProfileId','customers','products','invoices','proformas','factor_license','generated_licenses','allowed_domain','first_use_date','signatureImage','settings'];
+const KEYS=['profiles','activeProfileId','customers','products','invoices','proformas','factor_license','generated_licenses','allowed_domain','first_use_date','signatureImage','settings','notes','reminders'];
 const bkBlob=()=>{const o={};KEYS.forEach(k=>o[k]=ld(k,null));return new Blob([JSON.stringify(o)],{type:'application/json'})};
 function markBk(){localStorage.setItem('last_backup',String(Date.now()));showBkNote()}
 function showBkNote(){
  const has=ld('invoices',[]).length+ld('customers',[]).length+ld('products',[]).length>0,last=+localStorage.getItem('last_backup')||0;
- $('#bkNote').innerHTML=has&&Date.now()-last>7*864e5?`<div class="banner b-try">⚠️ ${last?'بیش از ۷ روز از آخرین پشتیبان گذشته':'هنوز پشتیبان نگرفته‌اید'} <button class="btn sm" data-go="backup" style="margin-right:8px">پشتیبان بگیر</button></div>`:'';
+ $('#bkNote').innerHTML=has&&Date.now()-last>5*864e5?`<div class="banner b-try">⚠️ ${last?'بیش از ۵ روز از آخرین پشتیبان گذشته':'هنوز پشتیبان نگرفته‌اید'} <button class="btn sm" data-go="backup" style="margin-right:8px">پشتیبان بگیر</button></div>`:'';
 }
 $('#bkSave').onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(bkBlob());a.download='factor-backup-'+Date.now()+'.json';a.click();markBk();toast('پشتیبان دریافت شد ✓')};
 $('#bkShare').onclick=async()=>{const f=new File([bkBlob()],'factor-backup.json.txt',{type:'text/plain'});try{if(navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({files:[f],title:'پشتیبان فاکتور آنلاین'});markBk()}else toast('اشتراک‌گذاری پشتیبانی نمی‌شود؛ فایل را دریافت کنید')}catch(e){}};
@@ -629,6 +725,127 @@ $('#installBtn').onclick=()=>modal(`<h3>📲 آموزش نصب برنامه رو
 <div class="item"><b>🍎 آیفون (Safari)</b><div class="muted">۱. دکمه‌ی اشتراک‌گذاری ⬆️ پایین صفحه را بزنید<br>۲. «Add to Home Screen» را انتخاب کنید<br>۳. «Add» را بزنید</div></div>
 <div class="item"><b>✅ بعد از نصب</b><div class="muted">برنامه بدون نوار آدرس باز می‌شود. آپدیت‌ها خودکار می‌رسند و اطلاعات روی همان گوشی می‌ماند. برای انتقال اطلاعات به گوشی دیگر از «پشتیبان» استفاده کنید.</div></div>
 <button class="btn full" onclick="closeModal()">متوجه شدم</button>`);
+
+/* ========= اعلان وسط صفحه ========= */
+function ctoast(m){const c=$('#ctoast');c.firstChild.textContent=m;c.style.display='flex';clearTimeout(ctoast.t);ctoast.t=setTimeout(()=>c.style.display='none',1500)}
+function smsText(v){return `${v.pro?'پیش‌فاکتور':'فاکتور'} ${v.no}\nمشتری: ${v.cust.name}\nمبلغ نهایی: ${fa(v.fin)} ${cn(v.cur)}\nمانده: ${fa(v.rem)} ${cn(v.cur)}\n${v.seller.name||''} ${v.seller.mobile||''}`}
+
+/* ========= پیشنهاد کالا هنگام تایپ در شرح ========= */
+let sugL=[],sugRow=null,sugIn=null;
+function posSug(){const b=$('#sug');if(!sugIn)return;const r=sugIn.getBoundingClientRect(),room=innerHeight-r.bottom;b.style.width=r.width+'px';b.style.left=r.left+'px';
+ if(room<220&&r.top>room){b.style.top='auto';b.style.bottom=(innerHeight-r.top+4)+'px';b.style.maxHeight=Math.min(240,r.top-10)+'px'}else{b.style.bottom='auto';b.style.top=(r.bottom+4)+'px';b.style.maxHeight=Math.max(120,Math.min(240,room-10))+'px'}}
+function showSug(inp){
+ const q=inp.value.trim().toLowerCase(),P=ld('products',[]);sugIn=inp;sugRow=inp.closest('tr');
+ const L=q?P.filter(p=>p.name.toLowerCase().includes(q)||(p.sku||'').toLowerCase().includes(q)):P.slice();
+ L.sort((a,b)=>(b.name.toLowerCase().startsWith(q)?1:0)-(a.name.toLowerCase().startsWith(q)?1:0));sugL=L.slice(0,8);
+ $('#sug').innerHTML=sugL.length?sugL.map((p,i)=>`<div data-i="${i}"><b>${esc(p.name)}</b><div class="muted">${p.unit?esc(p.unit)+' · ':''}فروش: ${fa(p.sell)} ${CUR()}${(p.stock>0||p.tr)?' · موجودی: '+fa(p.stock):''}${p.sku?' · کد '+esc(p.sku):''}</div></div>`).join(''):`<div class="muted">${P.length?'کالایی با این نام نیست؛ به‌صورت متن آزاد ثبت می‌شود':'بانک کالا خالی است؛ به‌صورت متن آزاد ثبت می‌شود'}</div>`;
+ $('#sug').style.display='block';posSug();
+}
+function hideSug(){$('#sug').style.display='none';sugIn=null}
+$('#sug').addEventListener('mousedown',e=>e.preventDefault());
+$('#sug').addEventListener('click',e=>{const d=e.target.closest('[data-i]');if(!d||!sugRow)return;const p=sugL[+d.dataset.i],t=sugRow;
+ t.querySelector('.d').value=p.name;t.querySelector('.p').value=p.sell||0;if(!num(t.querySelector('.q').value))t.querySelector('.q').value=1;calc();hideSug()});
+addEventListener('scroll',()=>{if(sugIn)posSug()},{passive:true});
+
+/* ========= حسابداری ساده ========= */
+const itemCost=(it,P)=>it.q*(it.b!==undefined?it.b:((P.find(p=>p.name===it.d)||{}).buy||0));
+const costOf=(x,P)=>x.items.reduce((t,i)=>t+itemCost(i,P),0);
+function accData(){
+ const per=$('#accPer').value,now=Date.now();
+ const ok=x=>per==='all'||(per==='m'?mk(x.date)===mk(now):pd(x.date).y===pd(now).y);
+ return ld('invoices',[]).filter(ok);
+}
+function renderAccounting(){
+ const D=accData(),all=ld('invoices',[]),P=ld('products',[]),S=(L,f)=>L.reduce((t,x)=>t+f(x),0);
+ const when={m:'این ماه',y:'امسال',all:'از اول تا الان'}[$('#accPer').value];
+ const income=S(D,x=>x.sub-x.disc),got=S(D,x=>x.paid),cost=S(D,x=>costOf(x,P)),profit=income-cost;
+ const owed=S(all,x=>x.rem||0),stock=P.reduce((t,p)=>t+(p.stock>0?p.stock*(p.buy||0):0),0);
+ const deb={};all.forEach(x=>{if(x.rem>0)deb[x.cust.name]=(deb[x.cust.name]||0)+x.rem});
+ const dl=Object.entries(deb).sort((a,b)=>b[1]-a[1]).slice(0,5);
+ const big=(ic,t,sub,v,col,extra='')=>`<div class="card" style="padding:14px"><div style="display:flex;align-items:center;gap:10px"><span style="font-size:26px">${ic}</span><div style="flex:1"><b style="color:var(--d);font-size:15px">${t}</b><div class="muted">${sub}</div></div></div><div style="font-size:20px;font-weight:800;margin-top:8px;color:${col||'var(--ink)'}">${fa(v)} ${CUR()}</div>${extra}</div>`;
+ const debtors=dl.length?`<div style="margin-top:8px;border-top:1px dashed var(--line2);padding-top:6px">${dl.map(d=>`<div class="row"><span>${esc(d[0])}</span><b style="flex:none;color:#b3261e">${fa(d[1])}</b></div>`).join('')}</div>`:'';
+ const hint=(cost===0&&income>0)?'<div class="muted" style="margin-top:6px">⚠️ قیمت خرید کالاها ثبت نشده؛ برای سود درست، آن را در «کالا و خدمات» وارد کنید.</div>':'';
+ $('#accBody').innerHTML=
+  big('🤝','طلب من','مشتری‌ها هنوز چقدر به من بدهکارند؟ (کل فاکتورها)',owed,owed>0?'#b3261e':'#0b6b3a',debtors)+
+  big('💰','درآمد من','چقدر فروخته‌ام؟ — '+when,income)+
+  big('📥','پولی که گرفته‌ام','از این فروش چقدر به دستم رسیده؟ — '+when,got,'#0b6b3a')+
+  big('🏭','خرج خرید کالا (سرمایه)','کالاهای فروخته‌شده را چقدر خریده بودم؟ — '+when,cost)+
+  big('📈','سود من','درآمد منهای خرج خرید — '+when,profit,profit<0?'#b3261e':'#0b6b3a',hint)+
+  big('📦','پول خوابیده در انبار','کالاهایی که هنوز نفروخته‌ام چقدر می‌ارزند؟',stock);
+}
+$('#accPer').onchange=renderAccounting;
+$('#accCsv').onclick=()=>{const D=accData(),P=ld('products',[]),q=v=>'"'+String(v??'').replace(/"/g,'""')+'"',H=['شماره','تاریخ','مشتری','جمع کل','تخفیف','مالیات','مبلغ نهایی','پرداخت‌شده','مانده','خرج خرید کالا','سود'];
+ const R=D.map(x=>{const c=costOf(x,P),a=x.sub-x.disc;return [x.no,x.dateFa,x.cust.name,x.sub,x.disc,x.fin-a,x.fin,x.paid,x.rem,c,a-c].map(q).join(',')});
+ const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['\ufeff'+[H.map(q).join(','),...R].join('\r\n')],{type:'text/csv;charset=utf-8'}));a.download='factor-accounting.csv';a.click()};
+
+/* ========= یادداشت‌ها ========= */
+const NF=new Intl.DateTimeFormat('fa-IR-u-ca-persian',{day:'numeric',month:'long',year:'numeric'});
+function renderNotes(){
+ const q=$('#q_notes').value.trim().toLowerCase(),L=ld('notes',[]).filter(n=>!q||(n.title+' '+n.body).toLowerCase().includes(q)).sort((a,b)=>b.t-a.t);
+ $('#ntList').innerHTML=L.map(n=>`<button class="item" data-n="${n.id}"><b>${esc(n.title)}</b><div class="muted" style="white-space:pre-line">${esc(n.body.slice(0,90))}${n.body.length>90?'…':''}</div><div class="muted" style="font-size:11px">${NF.format(n.t)} · ${fa(n.body.length)} نویسه</div></button>`).join('')||'<p class="muted">یادداشتی نیست</p>';
+}
+function openNote(id){
+ const n=ld('notes',[]).find(x=>x.id===id)||{};
+ modal(`<h3>${id?'ویرایش یادداشت':'یادداشت جدید'}</h3><label>عنوان</label><input id="nt_t" value="${esc(n.title||'')}"><label>متن (بدون محدودیت)</label><textarea id="nt_b" rows="12">${esc(n.body||'')}</textarea><div class="row" style="margin-top:12px"><button class="btn" id="ntOk">ذخیره</button>${id?'<button class="btn r" id="ntDel">حذف</button>':''}<button class="btn w" onclick="closeModal()">بستن</button></div>`);
+ $('#ntOk').onclick=()=>{const t=$('#nt_t').value.trim();if(!t){toast('برای یادداشت عنوان بنویسید');return}
+  const L=ld('notes',[]),o=L.find(x=>x.id===id);if(o){o.title=t;o.body=$('#nt_b').value;o.t=Date.now()}else L.push({id:uid(),title:t,body:$('#nt_b').value,t:Date.now()});
+  try{sv('notes',L)}catch(e){toast('حافظه پر است');return}closeModal();renderNotes();toast('ذخیره شد ✓')};
+ if(id)$('#ntDel').onclick=()=>ask('این یادداشت حذف شود؟',()=>{sv('notes',ld('notes',[]).filter(x=>x.id!==id));renderNotes()});
+}
+$('#ntAdd').onclick=()=>openNote();$('#q_notes').oninput=renderNotes;
+$('#ntList').onclick=e=>{const b=e.target.closest('[data-n]');if(b)openNote(b.dataset.n)};
+
+/* ========= یادآورها و برنامه‌ریزی ========= */
+const REMF=new Intl.DateTimeFormat('fa-IR-u-ca-persian',{weekday:'long',day:'numeric',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit'});
+function renderReminders(){
+ const L=ld('reminders',[]).sort((a,b)=>(a.done-b.done)||(a.at-b.at)),now=Date.now(),end=new Date();end.setHours(23,59,59,999);
+ $('#rmList').innerHTML=L.map(r=>{const late=!r.done&&r.at<now,today=!r.done&&!late&&r.at<=end.getTime();
+  return `<div class="item" style="${r.done?'opacity:.55':''}"><div class="row"><b style="flex:3;${r.done?'text-decoration:line-through':''}">${esc(r.title)}</b>${late?'<span class="badge b-no" style="flex:none">گذشته</span>':today?'<span class="badge b-try" style="flex:none">امروز</span>':''}</div><div class="muted">${REMF.format(r.at)}</div>${r.note?`<div style="margin-top:4px">${esc(r.note)}</div>`:''}<div class="row" style="margin-top:8px"><button class="btn sm s" data-rd="${r.id}">${r.done?'↩️ بازگردانی':'✅ انجام شد'}</button><button class="btn sm w" data-rc="${r.id}">📅 تقویم گوشی</button><button class="btn sm r" data-rx="${r.id}">🗑</button></div></div>`}).join('')||'<p class="muted">کاری ثبت نشده</p>';
+}
+function icsOf(r){const f=ms=>new Date(ms).toISOString().replace(/[-:]/g,'').replace(/\.\d+/,'');
+ return `BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//VPCDR//Factor Online//FA\r\nBEGIN:VEVENT\r\nUID:${r.id}@factor-online\r\nDTSTAMP:${f(Date.now())}\r\nDTSTART:${f(r.at)}\r\nDTEND:${f(r.at+36e5)}\r\nSUMMARY:${r.title}\r\nDESCRIPTION:${(r.note||'').replace(/\n/g,'\\n')}\r\nBEGIN:VALARM\r\nTRIGGER:-PT10M\r\nACTION:DISPLAY\r\nDESCRIPTION:${r.title}\r\nEND:VALARM\r\nEND:VEVENT\r\nEND:VCALENDAR`}
+function upRem(id,fn){const L=ld('reminders',[]),r=L.find(x=>x.id===id);if(r)fn(r);sv('reminders',L);showRemNote();if(cur==='reminders')renderReminders()}
+$('#rmAdd').onclick=()=>{const t=$('#rm_t').value.trim(),at=new Date($('#rm_at').value).getTime();
+ if(!t||isNaN(at)){toast('عنوان و زمان را وارد کنید');return}
+ const L=ld('reminders',[]);L.push({id:uid(),title:t,note:$('#rm_n').value.trim(),at,done:false,fired:at<=Date.now()});sv('reminders',L);
+ $('#rm_t').value=$('#rm_n').value='';renderReminders();showRemNote();toast('یادآور ثبت شد ✓')};
+$('#rmPerm').onclick=async()=>{if(!('Notification' in window)){toast('این مرورگر اعلان را پشتیبانی نمی‌کند');return}const r=await Notification.requestPermission();toast(r==='granted'?'اعلان فعال شد ✓':'اعلان فعال نشد')};
+$('#rmList').onclick=e=>{const b=e.target.closest('button');if(!b)return;const D=b.dataset;
+ if(D.rd)upRem(D.rd,r=>{r.done=!r.done});
+ if(D.rx)ask('این یادآور حذف شود؟',()=>{sv('reminders',ld('reminders',[]).filter(x=>x.id!==D.rx));renderReminders();showRemNote()});
+ if(D.rc){const r=ld('reminders',[]).find(x=>x.id===D.rc);if(r){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([icsOf(r)],{type:'text/calendar'}));a.download='reminder.ics';a.click();toast('فایل تقویم دریافت شد؛ آن را باز کنید')}}};
+function showRemNote(){const end=new Date();end.setHours(23,59,59,999);const n=ld('reminders',[]).filter(r=>!r.done&&r.at<=end.getTime()).length;
+ $('#remNote').innerHTML=n?`<div class="banner b-try">⏰ ${fa(n)} کار برای امروز یا عقب‌افتاده <button class="btn sm" data-go="reminders" style="margin-right:8px">مشاهده</button></div>`:''}
+function fireRem(r){
+ try{navigator.vibrate&&navigator.vibrate([300,150,300])}catch(e){}
+ if('Notification' in window&&Notification.permission==='granted'){try{if(navigator.serviceWorker&&navigator.serviceWorker.ready)navigator.serviceWorker.ready.then(g=>g.showNotification('⏰ '+r.title,{body:r.note||'',icon:'icon-192.png'}));else new Notification('⏰ '+r.title,{body:r.note||''})}catch(e){}}
+ modal(`<h3>⏰ یادآور</h3><p style="font-weight:800;font-size:16px">${esc(r.title)}</p>${r.note?`<p>${esc(r.note)}</p>`:''}<div class="row"><button class="btn" id="rmDone">انجام شد ✓</button><button class="btn w" id="rmSnz">۱۰ دقیقه بعد</button></div>`);
+ $('#rmDone').onclick=()=>{upRem(r.id,x=>x.done=true);closeModal()};$('#rmSnz').onclick=()=>{upRem(r.id,x=>{x.at=Date.now()+6e5;x.fired=false});closeModal()};
+}
+function chkRem(){const L=ld('reminders',[]);let ch=false;L.forEach(r=>{if(!r.done&&!r.fired&&r.at<=Date.now()){r.fired=true;ch=true;fireRem(r)}});if(ch){sv('reminders',L);showRemNote()}}
+setInterval(chkRem,20000);setTimeout(chkRem,1500);showRemNote();
+
+/* ========= هشدار پشتیبان‌گیری (هر ۵ روز) ========= */
+function bkAlert(){
+ const has=ld('invoices',[]).length+ld('customers',[]).length+ld('products',[]).length>0,last=+localStorage.getItem('last_backup')||0,today=dk(Date.now());
+ if(!has||Date.now()-last<=5*864e5||localStorage.getItem('bk_snz')===today||$('#modal').classList.contains('show'))return;
+ modal(`<h3>⏰ زمان پشتیبان‌گیری است</h3><p>${last?'بیش از ۵ روز از آخرین پشتیبان گذشته است.':'هنوز پشتیبان نگرفته‌اید.'} برای جلوگیری از از دست رفتن اطلاعات، الان پشتیبان بگیرید.</p><div class="row"><button class="btn" id="bkNow">پشتیبان بگیر</button><button class="btn w" id="bkLater">بعدا</button></div>`);
+ $('#bkNow').onclick=()=>{closeModal();go('backup')};$('#bkLater').onclick=()=>{localStorage.setItem('bk_snz',today);closeModal()};
+}
+setTimeout(bkAlert,1500);
+
+/* ========= پیام نصب هنگام ورود (PWA / WebAPK) ========= */
+let dip=null;
+const isStandalone=()=>matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;
+function hideInst(){$('#instBar').style.display='none'}
+function showInst(){if(isStandalone()||top!==self||location.protocol!=='https:'||Date.now()<(+localStorage.getItem('inst_snz')||0))return;$('#instBar').style.display='flex'}
+addEventListener('beforeinstallprompt',e=>{e.preventDefault();dip=e;showInst()});
+addEventListener('appinstalled',()=>{hideInst();toast('برنامه نصب شد ✓')});
+$('#instGo').onclick=async()=>{if(dip){try{dip.prompt();const r=await dip.userChoice;dip=null;if(r.outcome==='accepted')hideInst();return}catch(e){dip=null}}$('#installBtn').click()};
+$('#instLater').onclick=()=>{localStorage.setItem('inst_snz',String(Date.now()+3*864e5));hideInst()};
+setTimeout(showInst,1500);
+/* میانبرهای برنامه: ?go=invoice | notes | reminders */
+{const gp=new URLSearchParams(location.search).get('go');if(gp&&$('#p-'+gp))setTimeout(()=>go(gp),400)}
 
 /* ثبت Service Worker برای نصب (PWA/APK) - فقط روی HTTPS */
 if('serviceWorker' in navigator&&location.protocol==='https:')addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));

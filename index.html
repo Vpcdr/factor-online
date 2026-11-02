@@ -11,53 +11,55 @@
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon-192.png">
 <link rel="icon" type="image/png" href="icon-192.png">
-<link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css?v=1.4.0" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js?v=1.4.0"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js?v=1.4.0"></script>
+<link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css?v=1.5.0" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js?v=1.5.0"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js?v=1.5.0"></script>
 <style>
-:root{--g:#B78C2E;--g2:#8B6914;--d:#0F4C3C;--bg:#F5F1E8;--ink:#1d2b26}
+:root{--g:#B78C2E;--g2:#8B6914;--g3:#CDA143;--d:#0F4C3C;--d2:#1b6b55;--d3:#08301f;--bg:#F5F1E8;--line:#efe7d2;--line2:#e3dcc8;--soft:#fffdf8;--card:#fff;--ink:#1d2b26;--rad:20px;--ct:5px solid var(--g);--sh:0 10px 24px rgba(15,76,60,.12),0 2px 0 rgba(183,140,46,.25)}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{margin:0;font-family:Vazirmatn,Tahoma,sans-serif;color:var(--ink);background:var(--bg);min-height:100vh;
+body{margin:0;font-size:14px;font-family:Vazirmatn,Tahoma,sans-serif;color:var(--ink);background:var(--bg);min-height:100vh;
  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='none' stroke='%230F4C3C' stroke-opacity='.05' stroke-width='1.5'%3E%3Cpath d='M40 4c10 12 24 16 36 36-12 20-26 24-36 36C30 64 16 60 4 40 16 20 30 16 40 4z'/%3E%3Ccircle cx='40' cy='40' r='10'/%3E%3Cpath d='M40 30v20M30 40h20'/%3E%3C/g%3E%3C/svg%3E")}
 .wrap{max-width:980px;margin:0 auto;padding:12px 12px 90px}
-.card{background:#fff;border-radius:20px;border-top:5px solid var(--g);box-shadow:0 10px 24px rgba(15,76,60,.12),0 2px 0 rgba(183,140,46,.25);padding:16px;margin-bottom:14px}
-h2{color:var(--d);font-size:20px;font-weight:800;margin:0 0 12px}
-h3{color:var(--d);font-size:16px;font-weight:800;margin:14px 0 8px}
-label{display:block;font-weight:700;font-size:14px;color:var(--d);margin:10px 0 4px}
-input,select,textarea{width:100%;font:inherit;font-size:15px;font-weight:500;padding:11px 12px;border:2px solid #e3dcc8;border-radius:12px;background:#fff;color:var(--ink);outline:0}
+.card{background:var(--card);border-radius:var(--rad);border-top:var(--ct);box-shadow:var(--sh);padding:16px;margin-bottom:14px}
+h2{color:var(--d);font-size:18px;font-weight:800;margin:0 0 12px}
+h3{color:var(--d);font-size:15px;font-weight:800;margin:14px 0 8px}
+label{display:block;font-weight:700;font-size:13px;color:var(--d);margin:10px 0 4px}
+input,select,textarea{width:100%;font:inherit;font-size:14px;font-weight:500;padding:9px 11px;border:2px solid var(--line2);border-radius:12px;background:#fff;color:var(--ink);outline:0}
 input:focus,select:focus,textarea:focus{border-color:var(--g);box-shadow:0 0 0 3px rgba(183,140,46,.2)}
 input[type=checkbox]{width:20px;height:20px;accent-color:var(--d)}
-.btn{font:inherit;font-weight:800;font-size:15px;border:0;border-radius:16px;padding:12px 16px;cursor:pointer;color:#fff;background:linear-gradient(180deg,#CDA143,var(--g));box-shadow:0 5px 0 var(--g2),0 8px 14px rgba(0,0,0,.18);transition:.1s}
+.btn{font:inherit;font-weight:800;font-size:14px;border:0;border-radius:14px;padding:10px 14px;cursor:pointer;color:#fff;background:linear-gradient(180deg,var(--g3),var(--g));box-shadow:0 5px 0 var(--g2),0 8px 14px rgba(0,0,0,.18);transition:.1s}
 .btn:active{transform:translateY(4px);box-shadow:0 1px 0 var(--g2)}
-.btn.s{background:linear-gradient(180deg,#1b6b55,var(--d));box-shadow:0 5px 0 #08301f,0 8px 14px rgba(0,0,0,.18)}
+.btn.s{background:linear-gradient(180deg,var(--d2),var(--d));box-shadow:0 5px 0 var(--d3),0 8px 14px rgba(0,0,0,.18)}
 .btn.r{background:linear-gradient(180deg,#d9534f,#b3261e);box-shadow:0 5px 0 #7a1712}
-.btn.w{background:#fff;color:var(--d);border:2px solid var(--g);box-shadow:0 4px 0 #e3dcc8}
-.btn.sm{padding:7px 12px;font-size:13px;border-radius:12px;box-shadow:0 3px 0 var(--g2)}
+.btn.w{background:#fff;color:var(--d);border:2px solid var(--g);box-shadow:0 4px 0 var(--line2)}
+.btn.sm{padding:6px 10px;font-size:12px;border-radius:10px;box-shadow:0 3px 0 var(--g2)}
 .btn[disabled]{opacity:.45;pointer-events:none;filter:grayscale(.6)}
 .full{width:100%}
 .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.row>*{flex:1}
 header.card{border-top:0;border-bottom:3px solid var(--g);display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center}
 .logo{display:flex;align-items:center;gap:10px}
 .circ{width:48px;height:48px;flex:none;filter:drop-shadow(0 4px 6px rgba(139,105,20,.5))}.circ svg{width:100%;height:100%;display:block}
-.title{font-weight:800;font-size:20px;color:var(--d);cursor:pointer;user-select:none}
+.title{font-weight:800;font-size:18px;color:var(--d);cursor:pointer;user-select:none}
 .badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:800;padding:2px 10px;border-radius:99px;margin-top:2px}
 .b-ok{background:#dff5e8;color:#0b6b3a}.b-try{background:#fff3c4;color:#8a6500}.b-no{background:#fde0de;color:#b3261e}
 .dot{width:8px;height:8px;border-radius:50%;background:#18a957;animation:pulse 1.2s infinite}
 @keyframes pulse{50%{opacity:.25;transform:scale(1.5)}}
-.clock{background:#fff;border:2px solid #efe7d2;border-radius:14px;padding:6px 14px;text-align:center;font-weight:700;font-size:14px;color:var(--d)}
+.clock{background:#fff;border:2px solid var(--line);border-radius:14px;padding:6px 14px;text-align:center;font-weight:700;font-size:14px;color:var(--d)}
 .clock b{display:block;font-size:18px;font-family:ui-monospace,monospace;color:var(--g2)}
 .left{display:flex;flex-direction:column;align-items:flex-end;gap:4px;font-size:12px}
 .ver{font-family:ui-monospace,monospace;color:#6b6b6b}.by{color:var(--g);font-weight:800;font-size:14px}
 @media(max-width:700px){header.card{grid-template-columns:1fr auto}.clock{grid-column:1/-1;order:3;display:flex;justify-content:center;gap:12px;align-items:center}.clock b{display:inline}}
 .banner{border-radius:14px;padding:10px 14px;font-weight:800;margin-bottom:14px;text-align:center}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.hb{height:56px;border-radius:16px;font-size:16px}.hb.big{height:56px}
+.hb{height:52px;border-radius:22px;font-size:15px}
+.btn.hb{background:var(--g);box-shadow:none;border:0}.btn.hb.s{background:var(--d)}.btn.hb.w{background:var(--card);color:var(--d);border:2px solid var(--line2)}.btn.hb:active{transform:scale(.97);box-shadow:none}
+a.btn{display:block;text-align:center;text-decoration:none}
 .page{display:none}.page.show{display:block}
 .in{animation:slideIn .28s ease both}.out{animation:slideOut .22s ease both}
 @keyframes slideIn{from{transform:translateX(100%);opacity:0}to{transform:translateX(0);opacity:1}}
 @keyframes slideOut{from{transform:translateX(0);opacity:1}to{transform:translateX(-60%);opacity:0}}
 .top{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:12px}.top h2{flex-basis:100%}.top h2{margin:0}
-.item{border:2px solid #efe7d2;border-radius:16px;padding:12px;margin-bottom:10px;background:#fffdf8}
+.item{border:2px solid var(--line);border-radius:16px;padding:12px;margin-bottom:10px;background:var(--soft)}
 .item.act{border:4px solid var(--g)}
 .item b{color:var(--d)}.muted{color:#6b6b6b;font-size:13px}
 .bank{background:#F9F9F9;border-radius:14px;padding:4px 12px 12px;margin-top:10px;border:1px solid #eee}
@@ -66,14 +68,14 @@ table{width:100%;border-collapse:collapse}th{background:var(--d);color:#fff;padd
 td input{padding:8px}
 @media(max-width:700px){
  #itemsT thead{display:none}#itemsT,#itemsT tbody,#itemsT tr,#itemsT td{display:block;width:100%}
- #itemsT tr{border:2px solid #efe7d2;border-radius:14px;padding:8px;margin-bottom:10px;background:#fffdf8}
+ #itemsT tr{border:2px solid var(--line);border-radius:14px;padding:8px;margin-bottom:10px;background:var(--soft)}
  #itemsT td{display:flex;align-items:center;gap:8px;padding:4px 0}
  #itemsT td::before{content:attr(data-label);font-weight:800;color:var(--d);min-width:78px;font-size:13px}}
 .tot{display:grid;grid-template-columns:1fr 1fr;gap:10px}.tot .full2{grid-column:1/-1}
-.sum{background:linear-gradient(180deg,#14604b,var(--d));color:#fff;border-radius:16px;padding:12px;font-weight:800;text-align:center;font-size:18px}
+.sum{background:linear-gradient(180deg,#14604b,var(--d));color:#fff;border-radius:16px;padding:12px;font-weight:800;text-align:center;font-size:16px}
 .sum small{display:block;font-weight:500;font-size:13px;margin-top:4px;opacity:.9}
 #modal{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;align-items:center;justify-content:center;z-index:50;padding:12px}
-#modal.show{display:flex}#mbox{background:#fff;border-radius:20px;border-top:5px solid var(--g);padding:16px;max-width:760px;width:100%;max-height:92vh;overflow:auto}
+#modal.show{display:flex}#mbox{background:var(--card);border-radius:var(--rad);border-top:var(--ct);padding:16px;max-width:760px;width:100%;max-height:92vh;overflow:auto}
 #toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--d);color:#fff;padding:10px 20px;border-radius:99px;font-weight:700;z-index:99;display:none}
 footer{text-align:center;color:var(--d);font-weight:700;font-size:13px;padding:10px}
 .paper{position:relative;background:#fff;color:#111;padding:26px;width:100%;min-height:520px;font-size:14px;direction:rtl}
@@ -83,6 +85,23 @@ footer{text-align:center;color:var(--d);font-weight:700;font-size:13px;padding:1
 @media print{body.pt{background:#fff!important}body.pt .wrap,body.pt #modal,body.pt #toast{display:none!important}
 body.pt #thermal{display:block;margin:0 auto;color:#000;font-family:Vazirmatn,Tahoma,sans-serif;font-size:12px;line-height:1.6;direction:rtl;padding:2mm 0}
 #thermal hr{border:0;border-top:1px dashed #000;margin:4px 0}#thermal .r{display:flex;justify-content:space-between;gap:6px}#thermal .c{text-align:center}#thermal b{font-weight:800}}
+
+/* ===== پوسته‌ها: مینیمال / کلاسیک / سنتی ===== */
+:root[data-theme="min-a"]{--bg:#F3F5F4;--g:#2F7D6D;--g2:#1F5A4D;--g3:#3F917F;--d:#22302C;--d2:#34463F;--d3:#141D1A;--line:#E4E8E6;--line2:#D5DBD8;--soft:#FAFBFA;--ink:#1E2724}
+:root[data-theme="min-b"]{--bg:#F4F6FA;--g:#3B6FD4;--g2:#2851A3;--g3:#5B8BE6;--d:#1F2A44;--d2:#34426A;--d3:#121A2E;--line:#E5E9F2;--line2:#D6DCEA;--soft:#FAFBFE;--ink:#1B2236}
+:root[data-theme^="min"]{--rad:14px;--ct:1px solid var(--line2);--sh:0 1px 3px rgba(0,0,0,.07)}
+:root[data-theme^="min"] body{background-image:none}
+:root[data-theme^="min"] .btn{box-shadow:none;border-radius:12px;background:var(--g)}
+:root[data-theme^="min"] .btn.s{background:var(--d)}
+:root[data-theme^="min"] .btn.w{background:var(--card);color:var(--d);border:1px solid var(--line2)}
+:root[data-theme^="min"] .btn.r{background:#c0392b}
+:root[data-theme^="min"] .btn:active{transform:scale(.97);box-shadow:none}
+:root[data-theme^="min"] .btn.hb{border-radius:22px}
+:root[data-theme="cls-b"]{--bg:#F6EFE8;--g:#9B2D3F;--g2:#6E1B2B;--g3:#B8485B;--d:#2E2A35;--d2:#463F52;--d3:#1B1820;--line:#EBDDD2;--line2:#DDCBBB;--soft:#FFFAF6;--ink:#2A2430;--sh:0 10px 24px rgba(110,27,43,.14),0 2px 0 rgba(155,45,63,.25)}
+:root[data-theme="trd-a"]{--bg:#F2EBDC;--g:#B8902F;--g2:#8A6A1B;--g3:#D0AB4F;--d:#1B3A6B;--d2:#2D5596;--d3:#0F2447;--line:#E6DCC4;--line2:#D8CBA8;--soft:#FBF7EC;--ink:#1F2A3D;--rad:12px;--ct:6px double var(--g);--sh:0 8px 20px rgba(27,58,107,.16),0 2px 0 rgba(184,144,47,.3)}
+:root[data-theme="trd-a"] body{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='none' stroke='%231B3A6B' stroke-opacity='.08' stroke-width='1.5'%3E%3Cpath d='M40 4c10 12 24 16 36 36-12 20-26 24-36 36C30 64 16 60 4 40 16 20 30 16 40 4z'/%3E%3Ccircle cx='40' cy='40' r='10'/%3E%3Cpath d='M40 30v20M30 40h20'/%3E%3C/g%3E%3C/svg%3E")}
+:root[data-theme="trd-b"]{--bg:#F3E7D6;--g:#A83A2F;--g2:#7A2820;--g3:#C45548;--d:#1D6B73;--d2:#2A8A93;--d3:#0F454B;--line:#E8D7BE;--line2:#D9C3A3;--soft:#FBF3E6;--ink:#33241C;--rad:12px;--ct:6px double var(--d);--sh:0 8px 20px rgba(122,40,32,.16),0 2px 0 rgba(29,107,115,.3)}
+:root[data-theme="trd-b"] body{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='none' stroke='%23A83A2F' stroke-opacity='.08' stroke-width='1.5'%3E%3Cpath d='M40 4c10 12 24 16 36 36-12 20-26 24-36 36C30 64 16 60 4 40 16 20 30 16 40 4z'/%3E%3Ccircle cx='40' cy='40' r='10'/%3E%3Cpath d='M40 30v20M30 40h20'/%3E%3C/g%3E%3C/svg%3E")}
 </style><style id="pgs"></style>
 </head>
 <body>
@@ -90,7 +109,7 @@ body.pt #thermal{display:block;margin:0 auto;color:#000;font-family:Vazirmatn,Ta
 <header class="card">
  <div class="logo"><div class="circ"><svg viewBox="0 0 48 48" aria-label="F"><defs><linearGradient id="lgF" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E6C25E"/><stop offset=".55" stop-color="#B78C2E"/><stop offset="1" stop-color="#7A5A0E"/></linearGradient></defs><circle cx="24" cy="24" r="22.5" fill="url(#lgF)" stroke="#0F4C3C" stroke-width="2.5"/><circle cx="24" cy="24" r="17.5" fill="none" stroke="#fff" stroke-opacity=".5" stroke-width="1.2"/><ellipse cx="19" cy="11" rx="9" ry="4" fill="#fff" opacity=".22"/><text x="24" y="33.5" text-anchor="middle" font-family="Georgia,'Times New Roman',serif" font-weight="700" font-size="28" fill="#fff" stroke="#0F4C3C" stroke-width=".8" paint-order="stroke">F</text></svg></div><div><div class="title" id="ttl">فاکتور آنلاین</div><span id="badge" class="badge"></span></div></div>
  <div class="clock">📅 <span id="dt"></span></div>
- <div class="left"><span class="ver">ver1.4.0</span><span class="by">VPCDR</span><button class="btn sm" id="admBtn">⚙️ مدیریت</button></div>
+ <div class="left"><span class="ver">ver1.5.0</span><span class="by">VPCDR</span></div>
 </header>
 <div id="banner"></div>
 
@@ -105,7 +124,7 @@ body.pt #thermal{display:block;margin:0 auto;color:#000;font-family:Vazirmatn,Ta
   <button class="btn hb s" data-go="reports">📊 گزارش‌ها</button>
   <button class="btn hb w" data-go="backup">💾 پشتیبان</button>
   <button class="btn hb w" data-go="license" style="grid-column:1/-1">🔑 فعال‌سازی لایسنس</button>
-  <button class="btn hb s" id="installBtn" style="grid-column:1/-1">📲 آموزش نصب برنامه روی گوشی</button>
+  <button class="btn hb w" data-go="settings" style="grid-column:1/-1">⚙️ تنظیمات</button>
  </div>
 </section>
 
@@ -134,7 +153,7 @@ body.pt #thermal{display:block;margin:0 auto;color:#000;font-family:Vazirmatn,Ta
  <h3>مشخصات مشتری</h3>
  <label>نام</label><input id="iv_cn" list="dlCust"><datalist id="dlCust"></datalist>
  <div class="row"><div><label>موبایل</label><input id="iv_cm" type="tel"></div><div><label>شغل</label><input id="iv_cj"></div></div>
- <label>آدرس</label><input id="iv_ca"><label>مانده حساب (ریال)</label><input id="iv_cb" type="number" inputmode="numeric">
+ <label>آدرس</label><input id="iv_ca"><label>مانده حساب (<span class="cur"></span>)</label><input id="iv_cb" type="number" inputmode="numeric">
 </div>
 <div class="card"><h3 style="margin-top:0">اقلام</h3>
  <table id="itemsT"><thead><tr><th>ردیف</th><th>شرح کالا</th><th>تعداد</th><th>قیمت واحد</th><th>جمع ردیف</th><th></th></tr></thead><tbody id="rows"></tbody></table><datalist id="dlProd"></datalist>
@@ -145,7 +164,7 @@ body.pt #thermal{display:block;margin:0 auto;color:#000;font-family:Vazirmatn,Ta
  <div><label>مالیات %</label><input id="iv_tax" type="number" value="0" min="0"></div>
  <div><label>تخفیف %</label><input id="iv_dp" type="number" value="0" min="0" max="100"></div>
  <div><label>تخفیف مبلغ</label><input id="iv_da" type="number" value="0" min="0"></div>
- <div class="full2 sum"><span id="iv_fin">۰</span> ریال<small id="iv_words"></small></div>
+ <div class="full2 sum"><span id="iv_fin">۰</span> <span class="cur"></span><small id="iv_words"></small></div>
  <div><label>وضعیت پرداخت</label><select id="iv_st"><option value="unpaid">پرداخت نشده</option><option value="paid">پرداخت شده</option><option value="partial">تسویه جزئی</option></select></div>
  <div><label>مبلغ پرداخت‌شده</label><input id="iv_paid" type="number" value="0"></div>
  <div class="full2 muted" id="iv_rem"></div>
@@ -165,6 +184,13 @@ body.pt #thermal{display:block;margin:0 auto;color:#000;font-family:Vazirmatn,Ta
  <div class="row"><input id="q_inv" placeholder="🔍 جستجو نام یا شماره"><select id="f_inv"><option value="">همه</option><option value="inv">فاکتور</option><option value="pro">پیش‌فاکتور</option><option value="paid">پرداخت شده</option><option value="unpaid">پرداخت نشده</option><option value="partial">جزئی</option></select></div><div id="ilist" style="margin-top:12px"></div></section>
 <section class="page" id="p-customers"><div class="top"><button class="btn sm w" data-back>‹ بازگشت</button><button class="btn sm" data-home>🏠 صفحه اصلی</button><h2>دفترچه مشتریان</h2></div><div class="row"><input id="q_customers" placeholder="🔍 جستجو"><button class="btn sm" data-add="customers" style="flex:none">➕ جدید</button></div><div id="l_customers" style="margin-top:12px"></div></section>
 <section class="page" id="p-products"><div class="top"><button class="btn sm w" data-back>‹ بازگشت</button><button class="btn sm" data-home>🏠 صفحه اصلی</button><h2>بانک کالا و خدمات</h2></div><div class="row"><input id="q_products" placeholder="🔍 جستجو"><button class="btn sm" data-add="products" style="flex:none">➕ جدید</button></div><div id="l_products" style="margin-top:12px"></div></section>
+<section class="page" id="p-settings"><div class="top"><button class="btn sm w" data-back>‹ بازگشت</button><button class="btn sm" data-home>🏠 صفحه اصلی</button><h2>⚙️ تنظیمات</h2></div>
+<div class="card"><h3 style="margin-top:0">🔐 مدیریت</h3><button class="btn s full" id="admBtn">ورود به پنل مدیریت</button></div>
+<div class="card"><h3 style="margin-top:0">💱 واحد پولی</h3><div class="row" id="curRow"></div><p class="muted">واحد پیش‌فرض «تومان» است. تغییر واحد فقط عنوان را عوض می‌کند و اعداد تبدیل نمی‌شوند.</p></div>
+<div class="card"><h3 style="margin-top:0">🎨 ظاهر برنامه</h3><div id="themeGrid"></div></div>
+<div class="card"><h3 style="margin-top:0">📲 نصب روی گوشی</h3><button class="btn full" id="installBtn">آموزش نصب برنامه روی گوشی</button></div>
+<div class="card"><h3 style="margin-top:0">📬 ارتباط با ما</h3><div class="item" style="display:flex;align-items:center;gap:10px"><b dir="ltr" style="flex:1;font-size:13px;word-break:break-all">V.goldypoor@gmail.com</b><button class="btn sm" data-copy="V.goldypoor@gmail.com">📋 کپی</button></div><div class="item" style="display:flex;align-items:center;gap:10px"><b dir="ltr" style="flex:1;font-size:13px;word-break:break-all">09371226509</b><button class="btn sm" data-copy="09371226509">📋 کپی</button></div></div>
+</section>
 <section class="page" id="p-reports"><div class="top"><button class="btn sm w" data-back>‹ بازگشت</button><button class="btn sm" data-home>🏠 صفحه اصلی</button><h2>گزارش‌ها</h2></div><div id="repBody"></div></section>
 <section class="page" id="p-backup"><div class="top"><button class="btn sm w" data-back>‹ بازگشت</button><button class="btn sm" data-home>🏠 صفحه اصلی</button><h2>پشتیبان و بازیابی</h2></div><div class="card"><button class="btn full" id="bkSave">⬇️ دریافت فایل پشتیبان</button><button class="btn s full" id="bkShare" style="margin-top:12px">📤 ارسال پشتیبان (تلگرام، ایمیل، بله، ایتا ...)</button><p class="muted">اطلاعات فقط روی همین گوشی ذخیره می‌شود؛ هفته‌ای یک‌بار پشتیبان بگیرید.</p><label>بازیابی از فایل</label><input type="file" id="bkFile" accept=".json,.txt"></div></section>
 
@@ -179,7 +205,7 @@ body.pt #thermal{display:block;margin:0 auto;color:#000;font-family:Vazirmatn,Ta
 <div class="card"><h3 style="margin-top:0">لیست لایسنس‌ها</h3><div style="overflow:auto"><table><thead><tr><th>مشتری</th><th>کد کامل</th><th>تاریخ</th><th></th></tr></thead><tbody id="adList"></tbody></table></div></div>
 <div class="card"><label>دامنه مجاز</label><input id="ad_dom" dir="ltr"><div class="grid2" style="margin-top:12px"><button class="btn s" id="adTrial">ریست دوره آزمایشی</button><button class="btn r" id="adWipe">پاک کردن داده‌ها</button></div></div></section>
 
-<footer>Created by VPCDR . ver1.4.0</footer>
+<footer>Created by VPCDR . ver1.5.0</footer>
 </div>
 <div id="thermal"></div>
 <div id="modal"><div id="mbox"></div></div><div id="toast"></div>
@@ -187,7 +213,7 @@ body.pt #thermal{display:block;margin:0 auto;color:#000;font-family:Vazirmatn,Ta
 <script>
 /* ========= ابزارها ========= */
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
-const VER='ver1.4.0';
+const VER='ver1.5.0';
 const ld=(k,d)=>{try{const v=JSON.parse(localStorage.getItem(k));return v==null?d:v}catch(e){return d}};
 const sv=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
 const fa=n=>Number(n||0).toLocaleString('fa-IR');
@@ -205,6 +231,29 @@ async function copy(t){try{await navigator.clipboard.writeText(t)}catch(e){const
 
 const setDate=()=>{$('#dt').textContent=jdate()};setDate();setInterval(setDate,6e4);
 
+/* ========= تنظیمات: واحد پولی و پوسته ========= */
+const CURN={toman:'تومان',rial:'ریال',dollar:'دلار'};
+let SET=Object.assign({cur:'toman',theme:'cls-a'},ld('settings',{}));
+const CUR=()=>CURN[SET.cur]||'تومان',cn=c=>CURN[c||'rial']||'ریال';
+function applySet(){
+ document.documentElement.dataset.theme=SET.theme;
+ $$('.cur').forEach(e=>e.textContent=CUR());
+ const m=$('meta[name=theme-color]');if(m)m.content=getComputedStyle(document.documentElement).getPropertyValue('--d').trim()||'#0F4C3C';
+}
+function saveSet(){sv('settings',SET);applySet()}
+const THEMES=[['min-a','مینیمال ۱ — سبز خاکستری','#F3F5F4','#2F7D6D','#22302C'],['min-b','مینیمال ۲ — آبی','#F4F6FA','#3B6FD4','#1F2A44'],['cls-a','کلاسیک ۱ — طلایی و سبز','#F5F1E8','#B78C2E','#0F4C3C'],['cls-b','کلاسیک ۲ — زرشکی','#F6EFE8','#9B2D3F','#2E2A35'],['trd-a','سنتی ۱ — لاجوردی و طلایی','#F2EBDC','#B8902F','#1B3A6B'],['trd-b','سنتی ۲ — قالی سرخ و فیروزه‌ای','#F3E7D6','#A83A2F','#1D6B73']];
+function renderSettings(){
+ $('#curRow').innerHTML=Object.entries(CURN).map(([k,n])=>`<button class="btn ${SET.cur===k?'':'w'}" data-cur="${k}">${n}${k==='toman'?' (پیش‌فرض)':''}</button>`).join('');
+ const dot=c=>`<i style="width:20px;height:20px;border-radius:50%;background:${c};border:2px solid #fff;box-shadow:0 0 0 1px #bbb;margin-left:-6px"></i>`;
+ $('#themeGrid').innerHTML=THEMES.map(t=>`<div class="item ${SET.theme===t[0]?'act':''}" data-th="${t[0]}" style="display:flex;align-items:center;gap:12px;cursor:pointer"><span style="display:flex;padding-right:8px">${dot(t[2])}${dot(t[3])}${dot(t[4])}</span><b style="flex:1;font-size:13px">${t[1]}</b>${SET.theme===t[0]?'✓':''}</div>`).join('');
+}
+document.addEventListener('click',e=>{
+ const c=e.target.closest('[data-cur]');if(c){SET.cur=c.dataset.cur;saveSet();renderSettings();toast('واحد پولی: '+CUR());return}
+ const t=e.target.closest('[data-th]');if(t){SET.theme=t.dataset.th;saveSet();renderSettings()}
+});
+document.addEventListener('click',e=>{const c=e.target.closest('[data-copy]');if(c)copy(c.dataset.copy)});
+applySet();
+
 /* ========= ناوبری ========= */
 let cur='home',hist=[],editing=null;
 function go(id,back){
@@ -219,7 +268,7 @@ function go(id,back){
  setTimeout(()=>{o.classList.remove('show','out');n.classList.add('show','in');setTimeout(()=>n.classList.remove('in'),300);scrollTo(0,0)},200);
  cur=id;onEnter(id);
 }
-function onEnter(id){({profiles:renderProfiles,invoice:initInvoice,invoices:renderInvoices,reports:renderReports,customers:()=>renderList('customers'),products:()=>renderList('products'),license:()=>$('#lcInfo').textContent='',admin:renderAdmin})[id]?.()}
+function onEnter(id){({profiles:renderProfiles,invoice:initInvoice,settings:renderSettings,invoices:renderInvoices,reports:renderReports,customers:()=>renderList('customers'),products:()=>renderList('products'),license:()=>$('#lcInfo').textContent='',admin:renderAdmin})[id]?.()}
 document.addEventListener('click',e=>{
  if(e.target.closest('[data-home]')){hist=[];go('home',true);return}
  if(e.target.closest('[data-back]')){let t=hist.pop();while(t===cur&&hist.length)t=hist.pop();go(t&&t!==cur?t:'home',true);return}
@@ -324,9 +373,9 @@ function calc(){
  if(lastDisc==='p')$('#iv_da').value=Math.round(sub*num($('#iv_dp').value)/100);
  else $('#iv_dp').value=sub?+(num($('#iv_da').value)/sub*100).toFixed(2):0;
  const disc=Math.min(num($('#iv_da').value),sub),after=sub-disc,fin=Math.round(after+after*num($('#iv_tax').value)/100);
- $('#iv_sub').value=fa(sub);$('#iv_fin').textContent=fa(fin);$('#iv_words').textContent=fin?words(fin)+' ریال':'';
+ $('#iv_sub').value=fa(sub);$('#iv_fin').textContent=fa(fin);$('#iv_words').textContent=fin?words(fin)+' '+CUR():'';
  let paid=num($('#iv_paid').value);const st=$('#iv_st').value;if(st==='paid')paid=fin;if(st==='unpaid')paid=0;
- $('#iv_rem').textContent='مانده: '+fa(Math.max(fin-paid,0))+' ریال';
+ $('#iv_rem').textContent='مانده: '+fa(Math.max(fin-paid,0))+' '+CUR();
  return{sub,disc,fin,paid,rem:Math.max(fin-paid,0)};
 }
 $('#rows').addEventListener('input',calc);
@@ -339,7 +388,7 @@ function collect(){
  return{id:uid(),pro,seq:nextSeq(pro),no:$('#iv_no').value,date:Date.now(),dateFa:jdate(),seller:p,
  cust:{name:$('#iv_cn').value.trim(),mobile:$('#iv_cm').value.trim(),job:$('#iv_cj').value.trim(),address:$('#iv_ca').value.trim(),balance:num($('#iv_cb').value)},
  items,sub:t.sub,disc:t.disc,tax:num($('#iv_tax').value),fin:t.fin,status:$('#iv_st').value,paid:t.paid,rem:t.rem,
- note:$('#iv_note').value,terms:$('#iv_terms').value,stamp:$('#iv_stamp').checked,valid:pro?num($('#iv_valid').value):0};
+ note:$('#iv_note').value,terms:$('#iv_terms').value,stamp:$('#iv_stamp').checked,valid:pro?num($('#iv_valid').value):0,cur:SET.cur};
 }
 function paper(v){
  const s=v.seller||{},img=s.stamp||s.logo,st={paid:'پرداخت شده',unpaid:'پرداخت نشده',partial:'تسویه جزئی'}[v.status];
@@ -349,7 +398,7 @@ function paper(v){
  <p><b>مشتری:</b> ${esc(v.cust.name)} ${v.cust.mobile?'· '+esc(v.cust.mobile):''} ${v.cust.address?'· '+esc(v.cust.address):''}</p>
  <table><thead><tr><th>#</th><th>شرح</th><th>تعداد</th><th>قیمت واحد</th><th>جمع</th></tr></thead><tbody>${v.items.map((x,i)=>`<tr><td>${fa(i+1)}</td><td>${esc(x.d)}</td><td>${fa(x.q)}</td><td>${fa(x.p)}</td><td>${fa(x.q*x.p)}</td></tr>`).join('')}</tbody></table>
  <div>جمع کل: <b>${fa(v.sub)}</b> · تخفیف: <b>${fa(v.disc)}</b> · مالیات: <b>${fa(v.tax)}%</b></div>
- <div style="font-size:18px;margin:8px 0;color:#0F4C3C"><b>مبلغ نهایی: ${fa(v.fin)} ریال</b></div><div>${words(v.fin)} ریال</div>
+ <div style="font-size:18px;margin:8px 0;color:#0F4C3C"><b>مبلغ نهایی: ${fa(v.fin)} ${cn(v.cur)}</b></div><div>${words(v.fin)} ${cn(v.cur)}</div>
  <div style="margin-top:6px">وضعیت: <b>${st}</b> · پرداخت‌شده: ${fa(v.paid)} · مانده: ${fa(v.rem)}</div>
  ${v.pro?`<div>اعتبار پیش‌فاکتور: ${fa(v.valid)} روز</div>`:''}
  ${s.card?`<div dir="rtl">کارت: <span dir="ltr">${esc(s.card)}</span> ${s.sheba?' · شبا: <span dir="ltr">'+esc(s.sheba)+'</span>':''}</div>`:''}
@@ -369,7 +418,7 @@ $('#bSave').onclick=()=>{
  if(all.some(x=>x.no===v.no)){toast('شماره تکراری است');return}
  applyFx(v,1);all.push(v);sv(k,all);toast('ذخیره شد ✓ '+v.no);setNo();
 };
-$('#bSms').onclick=()=>{const v=collect();copy(`${v.pro?'پیش‌فاکتور':'فاکتور'} ${v.no}\nمشتری: ${v.cust.name}\nمبلغ نهایی: ${fa(v.fin)} ریال\nمانده: ${fa(v.rem)} ریال\n${v.seller.name||''} ${v.seller.mobile||''}`)};
+$('#bSms').onclick=()=>{const v=collect();copy(`${v.pro?'پیش‌فاکتور':'فاکتور'} ${v.no}\nمشتری: ${v.cust.name}\nمبلغ نهایی: ${fa(v.fin)} ${cn(v.cur)}\nمانده: ${fa(v.rem)} ${cn(v.cur)}\n${v.seller.name||''} ${v.seller.mobile||''}`)};
 async function capture(v){
  const d=document.createElement('div');d.style.cssText='position:fixed;left:-9999px;top:0;width:720px';d.innerHTML=paper(v);document.body.appendChild(d);
  try{await document.fonts.ready;return await html2canvas(d.firstChild,{scale:2,backgroundColor:'#fff',useCORS:true})}finally{d.remove()}
@@ -384,7 +433,7 @@ function thermalHTML(v){
  <div class="r"><span>${v.pro?'پیش‌فاکتور':'فاکتور'}</span><b dir="ltr">${esc(v.no)}</b></div><div>${esc(v.dateFa)}</div><div>مشتری: ${esc(v.cust.name)}</div><hr>
  ${v.items.map(x=>`<div><b>${esc(x.d)}</b></div><div class="r"><span>${fa(x.q)} × ${fa(x.p)}</span><span>${fa(x.q*x.p)}</span></div>`).join('')}<hr>
  <div class="r"><span>جمع کل</span><span>${fa(v.sub)}</span></div>${v.disc?`<div class="r"><span>تخفیف</span><span>${fa(v.disc)}</span></div>`:''}${v.tax?`<div class="r"><span>مالیات</span><span>${fa(v.tax)}%</span></div>`:''}
- <div class="r" style="font-size:14px"><b>مبلغ نهایی</b><b>${fa(v.fin)}</b></div><div>${words(v.fin)} ریال</div><hr>
+ <div class="r" style="font-size:14px"><b>مبلغ نهایی</b><b>${fa(v.fin)}</b></div><div>${words(v.fin)} ${cn(v.cur)}</div><hr>
  <div class="r"><span>${st}</span><span>مانده: ${fa(v.rem)}</span></div>${v.note?`<div>${esc(v.note)}</div>`:''}${s.card?`<div dir="ltr" style="text-align:center">${esc(s.card)}</div>`:''}<hr><div class="c">سپاس از خرید شما</div>`;
 }
 function thermal(v){
@@ -455,7 +504,7 @@ function renderInvoices(){
  const q=$('#q_inv').value.trim(),f=$('#f_inv').value;
  let all=[...ld('invoices',[]).map(x=>({...x,pro:false})),...ld('proformas',[]).map(x=>({...x,pro:true}))].sort((a,b)=>b.date-a.date);
  all=all.filter(x=>(!q||x.no.toLowerCase().includes(q.toLowerCase())||x.cust.name.includes(q))&&(!f||(f==='inv'?!x.pro:f==='pro'?x.pro:x.status===f)));
- $('#ilist').innerHTML=all.map(x=>`<div class="item"><div class="row"><b dir="ltr" style="flex:none">${esc(x.no)}</b><span>${esc(x.cust.name)}</span><b style="flex:none">${fa(x.fin)} ریال</b></div><div class="muted">${esc(x.dateFa)} · ${x.pro?'پیش‌فاکتور':{paid:'پرداخت شده',unpaid:'پرداخت نشده',partial:'جزئی'}[x.status]}${!x.pro&&x.rem>0?' · مانده '+fa(x.rem):''}</div>
+ $('#ilist').innerHTML=all.map(x=>`<div class="item"><div class="row"><b dir="ltr" style="flex:none">${esc(x.no)}</b><span>${esc(x.cust.name)}</span><b style="flex:none">${fa(x.fin)} ${cn(x.cur)}</b></div><div class="muted">${esc(x.dateFa)} · ${x.pro?'پیش‌فاکتور':{paid:'پرداخت شده',unpaid:'پرداخت نشده',partial:'جزئی'}[x.status]}${!x.pro&&x.rem>0?' · مانده '+fa(x.rem):''}</div>
  <div class="row" style="margin-top:8px"><button class="btn sm s" data-v="${x.id}">👁</button><button class="btn sm s" data-ed="${x.id}">✏️</button><button class="btn sm w" data-c="${x.id}">📋</button><button class="btn sm s" data-p="${x.id}">🖨</button><button class="btn sm w" data-sh="${x.id}">📤</button>${!x.pro&&x.rem>0?`<button class="btn sm" data-pay="${x.id}">💰 پرداخت</button>`:''}${x.pro?`<button class="btn sm" data-t="${x.id}">تبدیل</button>`:''}<button class="btn sm r" data-x="${x.id}">🗑</button></div></div>`).join('')||'<p class="muted">موردی یافت نشد</p>';
 }
 $('#q_inv').oninput=$('#f_inv').onchange=renderInvoices;
@@ -468,7 +517,7 @@ $('#ilist').onclick=e=>{
  if(D.sh)shareInv(v);
  if(D.x)ask('این مورد حذف شود؟',()=>{applyFx(v,-1);sv(pk,all.filter(x=>x.id!==id));renderInvoices()});
  if(D.pay){
-  modal(`<h3>ثبت پرداخت (مانده: ${fa(v.rem)} ریال)</h3><input id="payA" type="number" inputmode="numeric" value="${v.rem}"><div class="row" style="margin-top:12px"><button class="btn" id="payOk">ثبت</button><button class="btn w" onclick="closeModal()">انصراف</button></div>`);
+  modal(`<h3>ثبت پرداخت (مانده: ${fa(v.rem)} ${cn(v.cur)})</h3><input id="payA" type="number" inputmode="numeric" value="${v.rem}"><div class="row" style="margin-top:12px"><button class="btn" id="payOk">ثبت</button><button class="btn w" onclick="closeModal()">انصراف</button></div>`);
   $('#payOk').onclick=()=>{const a=Math.min(num($('#payA').value),v.rem);if(a<=0){toast('مبلغ نامعتبر');return}
    applyFx(v,-1);v.paid=(v.paid||0)+a;v.rem=Math.max(v.fin-v.paid,0);v.status=v.rem===0?'paid':'partial';applyFx(v,1);sv(pk,all);closeModal();renderInvoices();toast('پرداخت ثبت شد ✓')};
  }
@@ -494,8 +543,8 @@ function renderReports(){
  const L=a=>a.length?a.join(''):'<div class="muted">—</div>';
  const debt=ld('customers',[]).filter(c=>c.balance>0).sort((a,b)=>b.balance-a.balance);
  const low=ld('products',[]).filter(p=>(p.tr||p.stock>0)&&p.stock<=3);
- $('#repBody').innerHTML=`<div class="grid2"><div class="item" style="margin:0"><div class="muted">فروش امروز (${fa(td.length)} فاکتور)</div><b style="font-size:17px">${fa(sum(td))}</b></div><div class="item" style="margin:0"><div class="muted">فروش این ماه (${fa(mo.length)} فاکتور)</div><b style="font-size:17px">${fa(sum(mo))}</b></div></div>
- <div class="item" style="margin-top:10px"><div class="muted">جمع مانده فاکتورها (پرداخت‌نشده)</div><b style="font-size:17px">${fa(unpaid)} ریال</b></div>
+ $('#repBody').innerHTML=`<div class="grid2"><div class="item" style="margin:0"><div class="muted">فروش امروز (${fa(td.length)} فاکتور)</div><b style="font-size:15px">${fa(sum(td))}</b></div><div class="item" style="margin:0"><div class="muted">فروش این ماه (${fa(mo.length)} فاکتور)</div><b style="font-size:15px">${fa(sum(mo))}</b></div></div>
+ <div class="item" style="margin-top:10px"><div class="muted">جمع مانده فاکتورها (پرداخت‌نشده)</div><b style="font-size:15px">${fa(unpaid)} ${CUR()}</b></div>
  <div class="card"><h3 style="margin-top:0">فروش ۷ روز اخیر</h3>${days.join('')}</div>
  <div class="card"><h3 style="margin-top:0">پرفروش‌ترین کالاها</h3>${L(top(pm,o=>o.q).map(a=>`<div class="row"><span>${esc(a[0])}</span><span>${fa(a[1].q)} عدد</span><b>${fa(a[1].t)}</b></div>`))}</div>
  <div class="card"><h3 style="margin-top:0">بهترین مشتریان</h3>${L(top(cm,o=>o).map(a=>`<div class="row"><span>${esc(a[0])}</span><b>${fa(a[1])}</b></div>`))}</div>
@@ -528,7 +577,7 @@ function form(k,id){
 }
 
 /* ========= پشتیبان ========= */
-const KEYS=['profiles','activeProfileId','customers','products','invoices','proformas','factor_license','generated_licenses','allowed_domain','first_use_date','signatureImage'];
+const KEYS=['profiles','activeProfileId','customers','products','invoices','proformas','factor_license','generated_licenses','allowed_domain','first_use_date','signatureImage','settings'];
 const bkBlob=()=>{const o={};KEYS.forEach(k=>o[k]=ld(k,null));return new Blob([JSON.stringify(o)],{type:'application/json'})};
 function markBk(){localStorage.setItem('last_backup',String(Date.now()));showBkNote()}
 function showBkNote(){

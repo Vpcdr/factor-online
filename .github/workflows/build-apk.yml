@@ -1,1 +1,123 @@
 
+name: Build Android APK
+
+# اجرای دستی: Actions ← Build Android APK ← Run workflow
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  APP_VERSION: 1.0.${{ github.run_number }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      # ۱) کلید امضا: بار اول ساخته و رمزگذاری‌شده در ریپو ذخیره می‌شود؛ دفعه‌های بعد همان استفاده می‌شود
+      #    (برای اینکه نسخه‌های بعدی روی نسخه‌ی قبلی نصب شوند و اطلاعات پاک نشود)
+      - name: Prepare signing key
+        env:
+          PASS: ${{ secrets.KEYSTORE_PASSPHRASE }}
+        run: |
+          if [ -z "$PASS" ] || [ ${#PASS} -lt 6 ]; then
+            echo "::error::Secret KEYSTORE_PASSPHRASE is missing (min 6 characters)"; exit 1
+          fi
+          if [ -f android-signing/keystore.enc ]; then
+            openssl enc -d -aes-256-cbc -pbkdf2 -in android-signing/keystore.enc -out release.keystore -pass env:PASS
+          else
+            keytool -genkeypair -v -keystore release.keystore -alias factor -keyalg RSA -keysize 2048 -validity 10000 \
+              -storepass "$PASS" -keypass "$PASS" -dname "CN=VPCDR, O=VPCDR, C=IR"
+            mkdir -p android-signing
+            openssl enc -aes-256-cbc -pbkdf2 -salt -in release.keystore -out android-signing/keystore.enc -pass env:PASS
+            echo "NEWKEY=1" >> "$GITHUB_ENV"
+          fi
+
+      - name: Save new signing key (encrypted)
+        if: env.NEWKEY == '1'
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add android-signing/keystore.enc
+          git commit -m "Add encrypted Android signing key"
+          git push
+
+      # ۲) ساخت پروژه‌ی اندروید (Capacitor): برنامه آدرس GitHub Pages را باز می‌کند، پس هر آپدیت سایت خودکار به برنامه می‌رسد
+      - name: Create Capacitor project
+        run: |
+          npm init -y
+          npm install --no-audit --no-fund @capacitor/core@6 @capacitor/android@6 @capacitor/app@6 @capacitor/filesystem@6 @capacitor/share@6 @capacitor/local-notifications@6
+          npm install --no-audit --no-fund -D @capacitor/cli@6 @capacitor/assets@3
+          mkdir -p www assets
+          cat > capacitor.config.json <<'EOF'
+          {
+            "appId": "com.vpcdr.factor",
+            "appName": "فاکتور آنلاین",
+            "webDir": "www",
+            "server": {
+              "url": "https://vpcdr.github.io/factor-online/",
+              "errorPath": "offline.html",
+              "androidScheme": "https"
+            }
+          }
+          EOF
+          cat > www/index.html <<'EOF'
+          <!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="0;url=https://vpcdr.github.io/factor-online/">
+          EOF
+          cat > www/offline.html <<'EOF'
+          <!doctype html><html lang="fa" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>فاکتور آنلاین</title></head>
+          <body style="font-family:sans-serif;background:#F5F1E8;color:#0F4C3C;text-align:center;padding:48px 20px">
+          <h2>اتصال اینترنت برقرار نیست</h2><p>برای اولین اجرای برنامه به اینترنت نیاز است. اتصال را بررسی و دوباره تلاش کنید.</p>
+          <button style="font-size:18px;padding:12px 28px;border:0;border-radius:14px;background:#B78C2E;color:#fff" onclick="location.href='https://vpcdr.github.io/factor-online/'">تلاش دوباره</button>
+          </body></html>
+          EOF
+          npx cap add android
+          sed -i 's#</manifest>#    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />\n    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />\n</manifest>#' android/app/src/main/AndroidManifest.xml
+          sed -i "s/versionCode 1/versionCode ${{ github.run_number }}/; s/versionName \"1.0\"/versionName \"$APP_VERSION\"/" android/app/build.gradle
+          chmod +x android/gradlew
+
+      # ۳) آیکون برنامه از همان آیکون‌های ریپو (اگر خطا داد، آیکون پیش‌فرض می‌ماند)
+      - name: Generate app icon
+        continue-on-error: true
+        run: |
+          convert icon-512-maskable.png -resize 1024x1024 assets/icon-only.png
+          convert -size 2732x2732 xc:'#F5F1E8' \( icon-512.png -resize 700x700 \) -gravity center -composite assets/splash.png
+          npx @capacitor/assets generate --android --iconBackgroundColor '#0F4C3C' --iconBackgroundColorDark '#0F4C3C' --splashBackgroundColor '#F5F1E8' --splashBackgroundColorDark '#F5F1E8'
+
+      - name: Sync Android project
+        run: npx cap sync android
+
+      - name: Build release APK
+        working-directory: android
+        run: ./gradlew assembleRelease --no-daemon
+
+      - name: Sign APK
+        env:
+          PASS: ${{ secrets.KEYSTORE_PASSPHRASE }}
+        run: |
+          BT=$(ls "$ANDROID_HOME/build-tools" | sort -V | tail -1)
+          APK=$(find android/app/build/outputs/apk/release -name '*.apk' | head -1)
+          "$ANDROID_HOME/build-tools/$BT/zipalign" -p -f 4 "$APK" aligned.apk
+          "$ANDROID_HOME/build-tools/$BT/apksigner" sign --ks release.keystore --ks-key-alias factor \
+            --ks-pass env:PASS --key-pass env:PASS --out factor-online.apk aligned.apk
+          "$ANDROID_HOME/build-tools/$BT/apksigner" verify factor-online.apk
+
+      # ۴) انتشار فایل APK در بخش Releases (لینک ثابت دانلود آخرین نسخه)
+      - name: Publish release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ env.APP_VERSION }}
+          name: فاکتور آنلاین ${{ env.APP_VERSION }}
+          files: factor-online.apk 

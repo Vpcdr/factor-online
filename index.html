@@ -11,9 +11,9 @@
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon-192.png">
 <link rel="icon" type="image/png" href="icon-192.png">
-<link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css?v=1.6.1" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js?v=1.6.1"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js?v=1.6.1"></script>
+<link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css?v=1.7.1" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js?v=1.7.1"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js?v=1.7.1"></script>
 <style>
 :root{--g:#B78C2E;--g2:#8B6914;--g3:#CDA143;--d:#0F4C3C;--d2:#1b6b55;--d3:#08301f;--bg:#F5F1E8;--line:#efe7d2;--line2:#e3dcc8;--soft:#fffdf8;--card:#fff;--ink:#1d2b26;--rad:20px;--ct:5px solid var(--g);--sh:0 10px 24px rgba(15,76,60,.12),0 2px 0 rgba(183,140,46,.25)}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -106,8 +106,8 @@ body.pt #thermal{display:block;margin:0 auto;color:#000;font-family:Vazirmatn,Ta
 #ctoast span{background:rgba(15,76,60,.95);color:#fff;font-weight:800;font-size:19px;padding:18px 36px;border-radius:20px;box-shadow:0 12px 40px rgba(0,0,0,.35)}
 #sug{position:fixed;z-index:70;display:none;background:var(--card);border:2px solid var(--g);border-radius:12px;box-shadow:0 10px 24px rgba(0,0,0,.22);overflow:auto}
 #sug>div{padding:9px 12px;border-bottom:1px solid var(--line);cursor:pointer}#sug>div:last-child{border:0}#sug>div:active{background:var(--soft)}
-#instBar{position:fixed;left:10px;right:10px;bottom:calc(10px + env(safe-area-inset-bottom));display:none;align-items:center;gap:8px;background:var(--card);border:2px solid var(--g);border-radius:16px;padding:10px 12px;box-shadow:0 10px 30px rgba(0,0,0,.25);z-index:45}
 button.item{display:block;width:100%;font:inherit;text-align:right;color:inherit;cursor:pointer}
+.bbar{display:flex;justify-content:space-between;gap:10px;margin:16px 0 6px}.bbar .btn{flex:1;max-width:48%}
 </style><style id="pgs"></style>
 </head>
 <body>
@@ -115,7 +115,7 @@ button.item{display:block;width:100%;font:inherit;text-align:right;color:inherit
 <header class="card">
  <div class="logo"><div class="circ"><svg viewBox="0 0 48 48" aria-label="F"><defs><linearGradient id="lgF" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E6C25E"/><stop offset=".55" stop-color="#B78C2E"/><stop offset="1" stop-color="#7A5A0E"/></linearGradient></defs><circle cx="24" cy="24" r="22.5" fill="url(#lgF)" stroke="#0F4C3C" stroke-width="2.5"/><circle cx="24" cy="24" r="17.5" fill="none" stroke="#fff" stroke-opacity=".5" stroke-width="1.2"/><ellipse cx="19" cy="11" rx="9" ry="4" fill="#fff" opacity=".22"/><text x="24" y="33.5" text-anchor="middle" font-family="Georgia,'Times New Roman',serif" font-weight="700" font-size="28" fill="#fff" stroke="#0F4C3C" stroke-width=".8" paint-order="stroke">F</text></svg></div><div><div class="title" id="ttl">فاکتور آنلاین</div><span id="badge" class="badge"></span></div></div>
  <div class="clock">📅 <span id="dt"></span></div>
- <div class="left"><span class="ver">ver1.6.1</span><span class="by">VPCDR</span></div>
+ <div class="left"><span class="ver">ver1.7.1</span><span class="by">VPCDR</span></div>
 </header>
 <div id="banner"></div>
 
@@ -162,7 +162,7 @@ button.item{display:block;width:100%;font:inherit;text-align:right;color:inherit
  <h3>مشخصات مشتری</h3>
  <label>نام</label><input id="iv_cn" list="dlCust"><datalist id="dlCust"></datalist>
  <div class="row"><div><label>موبایل</label><input id="iv_cm" type="tel"></div><div><label>شغل</label><input id="iv_cj"></div></div>
- <label>آدرس</label><input id="iv_ca"><label>مانده حساب (<span class="cur"></span>)</label><input id="iv_cb" type="number" inputmode="numeric">
+ <label>آدرس</label><input id="iv_ca"><label>مانده حساب (<span class="cur"></span>)</label><input id="iv_cb" class="m" type="text" inputmode="numeric">
 </div>
 <div class="card"><h3 style="margin-top:0">اقلام</h3>
  <table id="itemsT"><thead><tr><th>ردیف</th><th>شرح کالا</th><th>تعداد</th><th>قیمت واحد</th><th>جمع ردیف</th><th></th></tr></thead><tbody id="rows"></tbody></table><datalist id="dlProd"></datalist>
@@ -172,10 +172,10 @@ button.item{display:block;width:100%;font:inherit;text-align:right;color:inherit
  <div><label>جمع کل</label><input id="iv_sub" readonly></div>
  <div><label>مالیات %</label><input id="iv_tax" type="number" value="0" min="0"></div>
  <div><label>تخفیف %</label><input id="iv_dp" type="number" value="0" min="0" max="100"></div>
- <div><label>تخفیف مبلغ</label><input id="iv_da" type="number" value="0" min="0"></div>
+ <div><label>تخفیف مبلغ</label><input id="iv_da" class="m" type="text" inputmode="numeric" value="0"></div>
  <div class="full2 sum"><span id="iv_fin">۰</span> <span class="cur"></span><small id="iv_words"></small></div>
  <div><label>وضعیت پرداخت</label><select id="iv_st"><option value="unpaid">پرداخت نشده</option><option value="paid">پرداخت شده</option><option value="partial">تسویه جزئی</option></select></div>
- <div><label>مبلغ پرداخت‌شده</label><input id="iv_paid" type="number" value="0"></div>
+ <div><label>مبلغ پرداخت‌شده</label><input id="iv_paid" class="m" type="text" inputmode="numeric" value="0"></div>
  <div class="full2 muted" id="iv_rem"></div>
 </div>
  <label>توضیحات</label><textarea id="iv_note" rows="2"></textarea>
@@ -197,7 +197,7 @@ button.item{display:block;width:100%;font:inherit;text-align:right;color:inherit
 <div class="card"><h3 style="margin-top:0">🔐 مدیریت</h3><button class="btn s full" id="admBtn">ورود به پنل مدیریت</button></div>
 <div class="card"><h3 style="margin-top:0">💱 واحد پولی</h3><div class="row" id="curRow"></div><p class="muted">واحد پیش‌فرض «تومان» است. تغییر واحد فقط عنوان را عوض می‌کند و اعداد تبدیل نمی‌شوند.</p></div>
 <div class="card"><h3 style="margin-top:0">🎨 ظاهر برنامه</h3><div id="themeGrid"></div></div>
-<div class="card"><h3 style="margin-top:0">📲 نصب روی گوشی</h3><button class="btn full" id="installBtn">آموزش نصب برنامه روی گوشی</button></div>
+<div class="card" id="apkCard"><h3 style="margin-top:0">📱 نسخه اندروید</h3><a class="btn full" target="_blank" rel="noopener" href="https://github.com/vpcdr/factor-online/releases/latest/download/factor-online.apk">⬇️ دانلود فایل APK</a><p class="muted" style="margin-bottom:0">بعد از دانلود، فایل را باز و نصب کنید (اجازه‌ی نصب از منبع ناشناس لازم است). به‌روزرسانی‌ها خودکار انجام می‌شود.</p></div>
 <div class="card"><h3 style="margin-top:0">📬 ارتباط با ما</h3><div class="item" style="display:flex;align-items:center;gap:10px"><b dir="ltr" style="flex:1;font-size:13px;word-break:break-all">V.goldypoor@gmail.com</b><button class="btn sm" data-copy="V.goldypoor@gmail.com">📋 کپی</button></div><div class="item" style="display:flex;align-items:center;gap:10px"><b dir="ltr" style="flex:1;font-size:13px;word-break:break-all">09371226509</b><button class="btn sm" data-copy="09371226509">📋 کپی</button></div></div>
 </section>
 <section class="page" id="p-accounting"><div class="top"><button class="btn sm w" data-back>‹ بازگشت</button><button class="btn sm" data-home>🏠 صفحه اصلی</button><h2>🧮 حسابداری ساده</h2></div>
@@ -241,23 +241,24 @@ button.item{display:block;width:100%;font:inherit;text-align:right;color:inherit
 <div class="card"><h3 style="margin-top:0">لیست لایسنس‌ها</h3><div style="overflow:auto"><table><thead><tr><th>مشتری</th><th>کد کامل</th><th>تاریخ</th><th></th></tr></thead><tbody id="adList"></tbody></table></div></div>
 <div class="card"><label>دامنه مجاز</label><input id="ad_dom" dir="ltr"><div class="grid2" style="margin-top:12px"><button class="btn s" id="adTrial">ریست دوره آزمایشی</button><button class="btn r" id="adWipe">پاک کردن داده‌ها</button></div></div></section>
 
-<footer>Created by VPCDR . ver1.6.1</footer>
+<footer>Created by VPCDR . ver1.7.1</footer>
 </div>
 <div id="thermal"></div>
 <div id="sug"></div><div id="ctoast"><span></span></div>
-<div id="instBar"><div style="flex:1"><b>📲 نصب برنامه روی گوشی</b><div class="muted">مثل یک اپلیکیشن، با میانبر روی صفحه‌ی اصلی گوشی اجرا می‌شود.</div></div><button class="btn sm" id="instGo">نصب برنامه</button><button class="btn sm w" id="instLater">بعدا</button></div>
 <div id="modal"><div id="mbox"></div></div><div id="toast"></div>
 
 <script>
 /* ========= ابزارها ========= */
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
-const VER='ver1.6.1';
+const VER='ver1.7.1';
 const ld=(k,d)=>{try{const v=JSON.parse(localStorage.getItem(k));return v==null?d:v}catch(e){return d}};
 const sv=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
-const fa=n=>Number(n||0).toLocaleString('fa-IR');
+const fa=n=>{const x=Number(n||0);if(!isFinite(x))return'۰';return x.toLocaleString('en-US',{maximumFractionDigits:2}).replace(/\d/g,d=>'۰۱۲۳۴۵۶۷۸۹'[d]).replace('.','٫')};
+const fmtL=n=>Number(n||0).toLocaleString('en-US',{maximumFractionDigits:2});
+const setM=(el,v)=>{el.value=(v===''||v==null)?'':fmtL(v)};
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,6);
-const num=v=>parseFloat(String(v).replace(/[۰-۹]/g,d=>'۰۱۲۳۴۵۶۷۸۹'.indexOf(d)))||0;
+const num=v=>parseFloat(String(v).replace(/[۰-۹]/g,d=>'۰۱۲۳۴۵۶۷۸۹'.indexOf(d)).replace(/[,٬،]/g,''))||0;
 const jdate=(d=new Date())=>new Intl.DateTimeFormat('fa-IR-u-ca-persian',{weekday:'long',day:'numeric',month:'long',year:'numeric'}).format(d);
 function toast(m){const t=$('#toast');t.textContent=m;t.style.display='block';clearTimeout(toast.t);toast.t=setTimeout(()=>t.style.display='none',2200)}
 function modal(html){$('#mbox').innerHTML=html;$('#modal').classList.add('show')}
@@ -292,24 +293,51 @@ document.addEventListener('click',e=>{
 document.addEventListener('click',e=>{const c=e.target.closest('[data-copy]');if(c)copy(c.dataset.copy)});
 applySet();
 
+/* قالب‌بندی زنده‌ی مبلغ: هر سه رقم با کاما جدا می‌شود */
+function fmtInput(el){
+ const v=el.value.replace(/[۰-۹]/g,d=>'۰۱۲۳۴۵۶۷۸۹'.indexOf(d)).replace(/[^\d.]/g,''),k=v.indexOf('.');
+ let i=k<0?v:v.slice(0,k);const d=k<0?null:v.slice(k+1).replace(/\./g,'').slice(0,2);
+ i=i.replace(/^0+(?=\d)/,'').replace(/\B(?=(\d{3})+(?!\d))/g,',');el.value=i+(d!==null?'.'+d:'');
+}
+document.addEventListener('input',e=>{if(e.target.classList&&e.target.classList.contains('m'))fmtInput(e.target)});
+
 /* ========= ناوبری ========= */
-let cur='home',hist=[],editing=null;
-function go(id,back){
+let cur='home',editing=null,hIdx=1,pages=[null,'home'],leaving=false,wantHome=false;
+function go(id,back,fromPop){
  if(id==='admin'&&!adminOK){askAdmin();return}/* ورود به مدیریت همیشه نیازمند رمز */
  if(cur==='admin'&&id!=='admin')adminOK=false;/* خروج از مدیریت = قفل مجدد */
  if(cur==='invoice'&&id!=='invoice')editing=null;
  if(id==='invoice'&&!licState().ok){toast('دوره آزمایشی تمام شده است');return}
  if(id===cur)return;
  const o=$('#p-'+cur),n=$('#p-'+id);
- if(!back)hist.push(cur);
  o.classList.add('out');
  setTimeout(()=>{o.classList.remove('show','out');n.classList.add('show','in');setTimeout(()=>n.classList.remove('in'),300);scrollTo(0,0)},200);
- cur=id;onEnter(id);
+ cur=id;
+ if(!fromPop){if(back)history.replaceState({p:id,i:hIdx},'');else{hIdx++;history.pushState({p:id,i:hIdx},'')}pages.length=hIdx;pages[hIdx]=id}
+ onEnter(id);
 }
+/* بازگشت واقعی به صفحه‌ی قبل (برای بعد از ذخیره) */
+function goBackTo(id){if(hIdx>1&&pages[hIdx-1]===id)history.back();else go(id,true)}
+/* مدخل ریشه + مدخل خانه؛ با کلید عقب از خانه، سؤال خروج پرسیده می‌شود */
+history.replaceState({root:1},'');history.pushState({p:'home',i:1},'');
+function askExit(){
+ modal('<h3>می‌خواهید از برنامه خارج شوید؟</h3><div class="row"><button class="btn r" id="exYes">بله، خروج</button><button class="btn w" id="exNo">نه، ماندن</button></div>');
+ $('#exNo').onclick=closeModal;
+ $('#exYes').onclick=()=>{closeModal();const A=window.Capacitor&&Capacitor.Plugins&&Capacitor.Plugins.App;if(A&&A.exitApp){A.exitApp();return}leaving=true;setTimeout(()=>leaving=false,800);history.go(-2)};
+}
+addEventListener('popstate',e=>{
+ if(leaving)return;
+ const st=e.state||{root:1};
+ if($('#modal').classList.contains('show')){closeModal();history.pushState({p:cur,i:hIdx},'');return}/* کلید عقب = بستن پنجره */
+ if(st.root||st.i===undefined){hIdx=1;pages.length=2;pages[1]=cur;history.pushState({p:cur,i:1},'');askExit();return}
+ hIdx=st.i;
+ if(st.p&&st.p!==cur){go(st.p,true,true);if(cur!==st.p){history.replaceState({p:cur,i:hIdx},'');pages[hIdx]=cur}}
+ if(wantHome){wantHome=false;if(cur!=='home')go('home',true)}
+});
 function onEnter(id){({profiles:renderProfiles,invoice:initInvoice,settings:renderSettings,accounting:renderAccounting,reminders:renderReminders,notes:renderNotes,home:()=>{showRemNote();showBkNote()},invoices:renderInvoices,reports:renderReports,customers:()=>renderList('customers'),products:()=>renderList('products'),license:()=>$('#lcInfo').textContent='',admin:renderAdmin})[id]?.()}
 document.addEventListener('click',e=>{
- if(e.target.closest('[data-home]')){hist=[];go('home',true);return}
- if(e.target.closest('[data-back]')){let t=hist.pop();while(t===cur&&hist.length)t=hist.pop();go(t&&t!==cur?t:'home',true);return}
+ if(e.target.closest('[data-home]')){if(cur==='home')return;const n=hIdx-1;if(n>0){wantHome=true;history.go(-n)}else go('home',true);return}
+ if(e.target.closest('[data-back]')){hIdx>1?history.back():go('home',true);return}
  const g=e.target.closest('[data-go]');if(g){go(g.dataset.go)}
 });
 
@@ -369,7 +397,7 @@ $('#pfSave').onclick=()=>{
  if(!p.name||!p.job||!p.mobile){toast('نام، شغل و موبایل الزامی است');return}
  profiles[editIdx]=p;try{sv('profiles',profiles)}catch(e){toast('حافظه پر است؛ تصاویر را کوچک‌تر کنید');return}
  if(ld('activeProfileId',null)==null)sv('activeProfileId',editIdx);
- toast('ذخیره شد ✓');hist.pop();go('profiles',true);
+ toast('ذخیره شد ✓');goBackTo('profiles');
 };
 
 /* ========= مبلغ به حروف ========= */
@@ -399,17 +427,17 @@ function setNo(){$('#iv_no').value=label(nextSeq($('#iv_pro').checked),$('#iv_pr
 $('#iv_pro').onchange=()=>{$('#proBox').style.display=$('#iv_pro').checked?'block':'none';setNo()};
 function addRow(){
  const tr=document.createElement('tr');
- tr.innerHTML=`<td data-label="ردیف" class="rn"></td><td data-label="شرح کالا"><input class="d" placeholder="شرح (با تایپ، کالا پیشنهاد می‌شود)"></td><td data-label="تعداد"><input class="q" type="number" inputmode="decimal" value="1" min="0"></td><td data-label="قیمت واحد"><input class="p" type="number" inputmode="numeric" value="0" min="0"></td><td data-label="جمع ردیف" class="t">۰</td><td data-label="حذف"><button class="btn sm r" type="button">✕</button></td>`;
+ tr.innerHTML=`<td data-label="ردیف" class="rn"></td><td data-label="شرح کالا"><input class="d" placeholder="شرح (با تایپ، کالا پیشنهاد می‌شود)"></td><td data-label="تعداد"><input class="q" type="number" inputmode="decimal" value="1" min="0"></td><td data-label="قیمت واحد"><input class="p m" type="text" inputmode="numeric" value="0"></td><td data-label="جمع ردیف" class="t">۰</td><td data-label="حذف"><button class="btn sm r" type="button">✕</button></td>`;
  tr.querySelector('button').onclick=()=>{tr.remove();calc()};
  {const di=tr.querySelector('.d');di.autocomplete='off';di.oninput=di.onfocus=()=>showSug(di);di.onblur=()=>setTimeout(hideSug,150)}
- tr.querySelector('.d').onchange=e=>{const p=ld('products',[]).find(x=>x.name===e.target.value);if(p){tr.querySelector('.p').value=p.sell||0;calc()}};
+ tr.querySelector('.d').onchange=e=>{const p=ld('products',[]).find(x=>x.name===e.target.value);if(p){setM(tr.querySelector('.p'),p.sell||0);calc()}};
  $('#rows').appendChild(tr);calc();
 }
 $('#addRow').onclick=addRow;
 let lastDisc='p';
 function calc(){
  let sub=0;$$('#rows tr').forEach((tr,i)=>{tr.querySelector('.rn').textContent=fa(i+1);const t=num(tr.querySelector('.q').value)*num(tr.querySelector('.p').value);tr.querySelector('.t').textContent=fa(t);sub+=t});
- if(lastDisc==='p')$('#iv_da').value=Math.round(sub*num($('#iv_dp').value)/100);
+ if(lastDisc==='p')setM($('#iv_da'),Math.round(sub*num($('#iv_dp').value)/100));
  else $('#iv_dp').value=sub?+(num($('#iv_da').value)/sub*100).toFixed(2):0;
  const disc=Math.min(num($('#iv_da').value),sub),after=sub-disc,fin=Math.round(after+after*num($('#iv_tax').value)/100);
  $('#iv_sub').value=fa(sub);$('#iv_fin').textContent=fa(fin);$('#iv_words').textContent=fin?words(fin)+' '+CUR():'';
@@ -420,7 +448,7 @@ function calc(){
 $('#rows').addEventListener('input',calc);
 $('#iv_dp').oninput=()=>{lastDisc='p';calc()};$('#iv_da').oninput=()=>{lastDisc='a';calc()};
 ['tax','st','paid'].forEach(k=>$('#iv_'+k).oninput=calc);
-$('#iv_cn').onchange=()=>{const c=ld('customers',[]).find(x=>x.name===$('#iv_cn').value);if(c){$('#iv_cm').value=c.mobile||'';$('#iv_cj').value=c.job||'';$('#iv_ca').value=c.address||'';$('#iv_cb').value=c.balance||0}};
+$('#iv_cn').onchange=()=>{const c=ld('customers',[]).find(x=>x.name===$('#iv_cn').value);if(c){$('#iv_cm').value=c.mobile||'';$('#iv_cj').value=c.job||'';$('#iv_ca').value=c.address||'';setM($('#iv_cb'),c.balance||0)}};
 function collect(){
  const t=calc(),pro=$('#iv_pro').checked,p=profiles[+$('#iv_prof').value]||{};
  const items=$$('#rows tr').map(tr=>({d:tr.querySelector('.d').value.trim(),q:num(tr.querySelector('.q').value),p:num(tr.querySelector('.p').value)})).filter(x=>x.d||x.p).map(x=>({...x,b:((ld('products',[]).find(p=>p.name===x.d))||{}).buy||0}));
@@ -466,7 +494,7 @@ $('#bSave').onclick=()=>{
   const k=editing.k,all=ld(k,[]),i=all.findIndex(x=>x.id===editing.id);if(i<0){toast('فاکتور یافت نشد');return}
   const o=all[i];applyFx(o,-1);
   Object.assign(v,{id:o.id,no:o.no,seq:o.seq,date:o.date,dateFa:o.dateFa,pro:o.pro,fx:false});
-  applyFx(v,1);all[i]=v;sv(k,all);toast('ویرایش شد ✓');editing=null;hist=[];go('invoices',true);return}
+  applyFx(v,1);all[i]=v;sv(k,all);toast('ویرایش شد ✓');editing=null;goBackTo('invoices');return}
  const k=v.pro?'proformas':'invoices',all=ld(k,[]);
  if(all.some(x=>x.no===v.no)){toast('شماره تکراری است');return}
  applyFx(v,1);all.push(v);sv(k,all);toast('ذخیره شد ✓ '+v.no);setNo();
@@ -485,9 +513,9 @@ function askStamp(v,cb){
 async function makePdf(v){
  try{const c=await capture(v),P=new window.jspdf.jsPDF('p','mm','a4'),pw=210,pxP=Math.floor(c.width*297/pw);
   for(let y=0,i=0;y<c.height;y+=pxP,i++){const h=Math.min(pxP,c.height-y),t=document.createElement('canvas');t.width=c.width;t.height=h;const x=t.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,t.width,h);x.drawImage(c,0,y,c.width,h,0,0,c.width,h);if(i)P.addPage();P.addImage(t.toDataURL('image/jpeg',.95),'JPEG',0,0,pw,h*pw/c.width)}
-  P.save(`factor-${v.no}.pdf`)}catch(e){toast('خطا در ساخت PDF')}
+  await saveFile(P.output('blob'),`factor-${v.no}.pdf`)}catch(e){toast('خطا در ساخت PDF')}
 }
-async function makeImg(v){try{const c=await capture(v),a=document.createElement('a');a.href=c.toDataURL('image/png');a.download=`factor-${v.no}.png`;a.click()}catch(e){toast('خطا در ساخت عکس')}}
+async function makeImg(v){try{const c=await capture(v),b=await new Promise(r=>c.toBlob(r,'image/png'));await saveFile(b,`factor-${v.no}.png`)}catch(e){toast('خطا در ساخت عکس')}}
 $('#bPdf').onclick=()=>{const v=collect();if(validateInv(v))askStamp(v,makePdf)};
 $('#bImg').onclick=()=>{const v=collect();if(validateInv(v))askStamp(v,makeImg)};
 
@@ -503,7 +531,7 @@ function thermalHTML(v){
 }
 function thermal(v){
  modal(`<h3>چاپ حرارتی</h3><div class="row"><button class="btn" id="th80">۸۰ میلی‌متر</button><button class="btn s" id="th58">۵۸ میلی‌متر</button></div>${navigator.bluetooth?'<h3>یا مستقیم با بلوتوث (اندروید)</h3><div class="row"><button class="btn w" id="bt80">🔵 ۸۰ میلی‌متر</button><button class="btn w" id="bt58">🔵 ۵۸ میلی‌متر</button></div>':''}<button class="btn w full" style="margin-top:12px" onclick="closeModal()">انصراف</button>`);
- const go=w=>{closeModal();$('#pgs').textContent=`@page{size:${w}mm auto;margin:0}`;const t=$('#thermal');t.style.width=(w-8)+'mm';t.innerHTML=thermalHTML(v);document.body.classList.add('pt');setTimeout(()=>window.print(),150)};
+ const go=w=>{closeModal();if(NATIVE){nativeReceipt(v,w);return}$('#pgs').textContent=`@page{size:${w}mm auto;margin:0}`;const t=$('#thermal');t.style.width=(w-8)+'mm';t.innerHTML=thermalHTML(v);document.body.classList.add('pt');setTimeout(()=>window.print(),150)};
  $('#th80').onclick=()=>go(80);$('#th58').onclick=()=>go(58);
  if(navigator.bluetooth){$('#bt80').onclick=()=>{closeModal();btPrint(v,80)};$('#bt58').onclick=()=>{closeModal();btPrint(v,58)}}
 }
@@ -552,13 +580,14 @@ function fillForm(v){
  $('#p-invoice h2').textContent='ویرایش '+(v.pro?'پیش‌فاکتور ':'فاکتور ')+v.no;
  const pi=profiles.findIndex(p=>complete(p)&&p.name===v.seller.name);if(pi>=0)$('#iv_prof').value=pi;
  $('#iv_pro').checked=v.pro;$('#iv_pro').disabled=true;$('#proBox').style.display=v.pro?'block':'none';$('#iv_valid').value=v.valid||7;$('#iv_no').value=v.no;
- $('#iv_cn').value=v.cust.name;$('#iv_cm').value=v.cust.mobile;$('#iv_cj').value=v.cust.job;$('#iv_ca').value=v.cust.address;$('#iv_cb').value=v.cust.balance||'';
- $('#rows').innerHTML='';v.items.forEach(it=>{addRow();const tr=$('#rows').lastChild;tr.querySelector('.d').value=it.d;tr.querySelector('.q').value=it.q;tr.querySelector('.p').value=it.p});if(!v.items.length)addRow();
- lastDisc='a';$('#iv_da').value=v.disc;$('#iv_tax').value=v.tax;$('#iv_st').value=v.status;$('#iv_paid').value=v.paid;$('#iv_note').value=v.note||'';$('#iv_terms').value=v.terms||'';$('#iv_stamp').checked=!!v.stamp;calc();
+ $('#iv_cn').value=v.cust.name;$('#iv_cm').value=v.cust.mobile;$('#iv_cj').value=v.cust.job;$('#iv_ca').value=v.cust.address;setM($('#iv_cb'),v.cust.balance||'');
+ $('#rows').innerHTML='';v.items.forEach(it=>{addRow();const tr=$('#rows').lastChild;tr.querySelector('.d').value=it.d;tr.querySelector('.q').value=it.q;setM(tr.querySelector('.p'),it.p)});if(!v.items.length)addRow();
+ lastDisc='a';setM($('#iv_da'),v.disc);$('#iv_tax').value=v.tax;$('#iv_st').value=v.status;setM($('#iv_paid'),v.paid);$('#iv_note').value=v.note||'';$('#iv_terms').value=v.terms||'';$('#iv_stamp').checked=!!v.stamp;calc();
 }
 function shareInv(v){askStamp(v,doShare)}
 async function doShare(v){
  try{const c=await capture(v),blob=await new Promise(r=>c.toBlob(r,'image/png')),f=new File([blob],`factor-${v.no}.png`,{type:'image/png'});
+  if(NATIVE){await saveFile(blob,f.name);return}
   if(navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({files:[f],title:v.no});return}
   const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=f.name;a.click();toast('عکس دانلود شد؛ از گالری بفرستید')}
  catch(e){if(e.name!=='AbortError')toast('خطا در اشتراک‌گذاری')}
@@ -611,7 +640,7 @@ $('#ilist').onclick=e=>{
  if(D.sm)copy(smsText(v));
  if(D.x)ask('این مورد حذف شود؟',()=>{applyFx(v,-1);sv(pk,all.filter(x=>x.id!==id));renderInvoices()});
  if(D.pay){
-  modal(`<h3>ثبت پرداخت (مانده: ${fa(v.rem)} ${cn(v.cur)})</h3><input id="payA" type="number" inputmode="numeric" value="${v.rem}"><div class="row" style="margin-top:12px"><button class="btn" id="payOk">ثبت</button><button class="btn w" onclick="closeModal()">انصراف</button></div>`);
+  modal(`<h3>ثبت پرداخت (مانده: ${fa(v.rem)} ${cn(v.cur)})</h3><input id="payA" class="m" type="text" inputmode="numeric" value="${fmtL(v.rem)}"><div class="row" style="margin-top:12px"><button class="btn" id="payOk">ثبت</button><button class="btn w" onclick="closeModal()">انصراف</button></div>`);
   $('#payOk').onclick=()=>{const a=Math.min(num($('#payA').value),v.rem);if(a<=0){toast('مبلغ نامعتبر');return}
    applyFx(v,-1);v.paid=(v.paid||0)+a;v.rem=Math.max(v.fin-v.paid,0);v.status=v.rem===0?'paid':'partial';applyFx(v,1);sv(pk,all);closeModal();renderInvoices();toast('پرداخت ثبت شد ✓')};
  }
@@ -664,7 +693,7 @@ function renderList(k){
 $$('[data-add]').forEach(b=>b.onclick=()=>form(b.dataset.add));
 function form(k,id){
  const x=ld(k,[]).find(y=>y.id===id)||{};
- modal(`<h3>${id?'ویرایش':'افزودن'} ${CFG[k].t}</h3>${CFG[k].f.map(f=>`<label>${f[1]}</label><input id="fm_${f[0]}" ${f[2]?'type="number" inputmode="numeric"':''} value="${esc(x[f[0]]??'')}">`).join('')}<div class="row" style="margin-top:14px"><button class="btn" id="fmOk">ذخیره</button><button class="btn w" onclick="closeModal()">انصراف</button></div>`);
+ modal(`<h3>${id?'ویرایش':'افزودن'} ${CFG[k].t}</h3>${CFG[k].f.map(f=>`<label>${f[1]}</label><input id="fm_${f[0]}" ${f[2]?'type="text" inputmode="numeric" class="m"':''} value="${f[2]&&x[f[0]]!==undefined&&x[f[0]]!==''?fmtL(x[f[0]]):esc(x[f[0]]??'')}">`).join('')}<div class="row" style="margin-top:14px"><button class="btn" id="fmOk">ذخیره</button><button class="btn w" onclick="closeModal()">انصراف</button></div>`);
  $('#fmOk').onclick=()=>{
   const o={id:x.id||uid()};CFG[k].f.forEach(f=>o[f[0]]=f[2]?num($('#fm_'+f[0]).value):$('#fm_'+f[0]).value.trim());
   if(!o.name){toast('نام الزامی است');return}
@@ -680,8 +709,8 @@ function showBkNote(){
  const has=ld('invoices',[]).length+ld('customers',[]).length+ld('products',[]).length>0,last=+localStorage.getItem('last_backup')||0;
  $('#bkNote').innerHTML=has&&Date.now()-last>5*864e5?`<div class="banner b-try">⚠️ ${last?'بیش از ۵ روز از آخرین پشتیبان گذشته':'هنوز پشتیبان نگرفته‌اید'} <button class="btn sm" data-go="backup" style="margin-right:8px">پشتیبان بگیر</button></div>`:'';
 }
-$('#bkSave').onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(bkBlob());a.download='factor-backup-'+Date.now()+'.json';a.click();markBk();toast('پشتیبان دریافت شد ✓')};
-$('#bkShare').onclick=async()=>{const f=new File([bkBlob()],'factor-backup.json.txt',{type:'text/plain'});try{if(navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({files:[f],title:'پشتیبان فاکتور آنلاین'});markBk()}else toast('اشتراک‌گذاری پشتیبانی نمی‌شود؛ فایل را دریافت کنید')}catch(e){}};
+$('#bkSave').onclick=async()=>{await saveFile(bkBlob(),'factor-backup-'+Date.now()+'.json');markBk();toast('پشتیبان آماده شد ✓')};
+$('#bkShare').onclick=async()=>{if(NATIVE){await saveFile(bkBlob(),'factor-backup.json');markBk();return}const f=new File([bkBlob()],'factor-backup.json.txt',{type:'text/plain'});try{if(navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({files:[f],title:'پشتیبان فاکتور آنلاین'});markBk()}else toast('اشتراک‌گذاری پشتیبانی نمی‌شود؛ فایل را دریافت کنید')}catch(e){}};
 $('#bkFile').onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const o=JSON.parse(r.result);ask('داده‌های فعلی جایگزین شود؟',()=>{KEYS.forEach(k=>{if(o[k]!=null)sv(k,o[k])});location.reload()})}catch(x){toast('فایل نامعتبر است')}};r.readAsText(f)};
 showBkNote();
 
@@ -718,13 +747,34 @@ $('#adWipe').onclick=()=>ask('همه داده‌ها پاک شود؟ (لایسن
 /* ========= شروع ========= */
 document.addEventListener('DOMContentLoaded',()=>{updateLicenseStatusBadge();if(new URLSearchParams(location.search).get('admin')==='1')askAdmin()});
 if(document.readyState!=='loading')updateLicenseStatusBadge();
-/* ========= آموزش نصب برنامه روی گوشی (دائمی) ========= */
-$('#installBtn').onclick=()=>modal(`<h3>📲 آموزش نصب برنامه روی گوشی</h3>
-<div class="item"><b>۱) باز کردن آدرس</b><div class="muted">آدرس زیر را مستقیم در مرورگر گوشی باز کنید (نه از داخل تلگرام یا برنامه‌های دیگر):</div><div dir="ltr" style="font-weight:800;word-break:break-all;margin-top:4px">https://vpcdr.github.io/factor-online/</div></div>
-<div class="item"><b>🤖 اندروید (Chrome)</b><div class="muted">۱. منوی سه‌نقطه ⋮ بالای صفحه را بزنید<br>۲. «نصب برنامه» یا «افزودن به صفحه اصلی» را انتخاب کنید<br>۳. «نصب» را تایید کنید<br>۴. آیکون F طلایی روی صفحه‌ی گوشی ساخته می‌شود</div></div>
-<div class="item"><b>🍎 آیفون (Safari)</b><div class="muted">۱. دکمه‌ی اشتراک‌گذاری ⬆️ پایین صفحه را بزنید<br>۲. «Add to Home Screen» را انتخاب کنید<br>۳. «Add» را بزنید</div></div>
-<div class="item"><b>✅ بعد از نصب</b><div class="muted">برنامه بدون نوار آدرس باز می‌شود. آپدیت‌ها خودکار می‌رسند و اطلاعات روی همان گوشی می‌ماند. برای انتقال اطلاعات به گوشی دیگر از «پشتیبان» استفاده کنید.</div></div>
-<button class="btn full" onclick="closeModal()">متوجه شدم</button>`);
+/* ========= سازگاری با نسخه‌ی اندروید (APK) ========= */
+const NATIVE=!!(window.Capacitor&&Capacitor.isNativePlatform&&Capacitor.isNativePlatform());
+if(NATIVE){const c=$('#apkCard');if(c)c.style.display='none'}
+/* ذخیره/ارسال فایل: در اندروید از برگه‌ی اشتراک‌گذاری، در مرورگر دانلود معمولی */
+async function saveFile(blob,name){
+ if(NATIVE){
+  try{
+   const b64=await new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(String(r.result).split(',')[1]);r.onerror=rej;r.readAsDataURL(blob)});
+   const w=await Capacitor.Plugins.Filesystem.writeFile({path:name,data:b64,directory:'CACHE'});
+   await Capacitor.Plugins.Share.share({title:name,url:w.uri,dialogTitle:'ذخیره یا ارسال فایل'});return true;
+  }catch(e){if(/cancel/i.test(String(e&&e.message||e)))return false}
+ }
+ const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();return true;
+}
+/* رسید حرارتی در اندروید: تصویر رسید برای چاپ (مثلا با برنامه‌ی RawBT) یا ذخیره ارسال می‌شود */
+async function nativeReceipt(v,w){
+ try{const dots=w===58?384:576,d=document.createElement('div');
+  d.style.cssText=`position:fixed;left:-9999px;top:0;width:${dots}px;box-sizing:border-box;padding:6px;background:#fff;color:#000;font-family:Vazirmatn,Tahoma,sans-serif;font-size:22px;line-height:1.6;direction:rtl`;
+  d.innerHTML='<style>.r{display:flex;justify-content:space-between;gap:6px}.c{text-align:center}hr{border:0;border-top:2px dashed #000;margin:6px 0}b{font-weight:800}</style>'+thermalHTML(v);
+  document.body.appendChild(d);await document.fonts.ready;const cv=await html2canvas(d,{scale:1,backgroundColor:'#fff'});d.remove();
+  const b=await new Promise(r=>cv.toBlob(r,'image/png'));await saveFile(b,`receipt-${v.no}.png`)}catch(e){toast('خطا در ساخت رسید')}
+}
+/* یادآور واقعی (حتی وقتی برنامه بسته است) */
+const nid=id=>{let h=0;for(const c of id)h=(h*31+c.charCodeAt(0))|0;return Math.abs(h)%2147483000+1};
+async function nSchedule(r){if(!NATIVE)return;try{const L=Capacitor.Plugins.LocalNotifications;await L.requestPermissions();await L.schedule({notifications:[{id:nid(r.id),title:'⏰ '+r.title,body:r.note||'یادآور فاکتور آنلاین',schedule:{at:new Date(r.at),allowWhileIdle:true}}]})}catch(e){}}
+async function nCancel(r){if(!NATIVE)return;try{await Capacitor.Plugins.LocalNotifications.cancel({notifications:[{id:nid(r.id)}]})}catch(e){}}
+/* دکمه‌ی بازگشت گوشی اندروید = همان history.back (سؤال خروج در popstate) */
+if(NATIVE&&Capacitor.Plugins.App){try{Capacitor.Plugins.App.addListener('backButton',()=>history.back())}catch(e){}}
 
 /* ========= اعلان وسط صفحه ========= */
 function ctoast(m){const c=$('#ctoast');c.firstChild.textContent=m;c.style.display='flex';clearTimeout(ctoast.t);ctoast.t=setTimeout(()=>c.style.display='none',1500)}
@@ -744,7 +794,7 @@ function showSug(inp){
 function hideSug(){$('#sug').style.display='none';sugIn=null}
 $('#sug').addEventListener('mousedown',e=>e.preventDefault());
 $('#sug').addEventListener('click',e=>{const d=e.target.closest('[data-i]');if(!d||!sugRow)return;const p=sugL[+d.dataset.i],t=sugRow;
- t.querySelector('.d').value=p.name;t.querySelector('.p').value=p.sell||0;if(!num(t.querySelector('.q').value))t.querySelector('.q').value=1;calc();hideSug()});
+ t.querySelector('.d').value=p.name;setM(t.querySelector('.p'),p.sell||0);if(!num(t.querySelector('.q').value))t.querySelector('.q').value=1;calc();hideSug()});
 addEventListener('scroll',()=>{if(sugIn)posSug()},{passive:true});
 
 /* ========= حسابداری ساده ========= */
@@ -776,7 +826,7 @@ function renderAccounting(){
 $('#accPer').onchange=renderAccounting;
 $('#accCsv').onclick=()=>{const D=accData(),P=ld('products',[]),q=v=>'"'+String(v??'').replace(/"/g,'""')+'"',H=['شماره','تاریخ','مشتری','جمع کل','تخفیف','مالیات','مبلغ نهایی','پرداخت‌شده','مانده','خرج خرید کالا','سود'];
  const R=D.map(x=>{const c=costOf(x,P),a=x.sub-x.disc;return [x.no,x.dateFa,x.cust.name,x.sub,x.disc,x.fin-a,x.fin,x.paid,x.rem,c,a-c].map(q).join(',')});
- const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['\ufeff'+[H.map(q).join(','),...R].join('\r\n')],{type:'text/csv;charset=utf-8'}));a.download='factor-accounting.csv';a.click()};
+ saveFile(new Blob(['\ufeff'+[H.map(q).join(','),...R].join('\r\n')],{type:'text/csv;charset=utf-8'}),'factor-accounting.csv')};
 
 /* ========= یادداشت‌ها ========= */
 const NF=new Intl.DateTimeFormat('fa-IR-u-ca-persian',{day:'numeric',month:'long',year:'numeric'});
@@ -804,16 +854,16 @@ function renderReminders(){
 }
 function icsOf(r){const f=ms=>new Date(ms).toISOString().replace(/[-:]/g,'').replace(/\.\d+/,'');
  return `BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//VPCDR//Factor Online//FA\r\nBEGIN:VEVENT\r\nUID:${r.id}@factor-online\r\nDTSTAMP:${f(Date.now())}\r\nDTSTART:${f(r.at)}\r\nDTEND:${f(r.at+36e5)}\r\nSUMMARY:${r.title}\r\nDESCRIPTION:${(r.note||'').replace(/\n/g,'\\n')}\r\nBEGIN:VALARM\r\nTRIGGER:-PT10M\r\nACTION:DISPLAY\r\nDESCRIPTION:${r.title}\r\nEND:VALARM\r\nEND:VEVENT\r\nEND:VCALENDAR`}
-function upRem(id,fn){const L=ld('reminders',[]),r=L.find(x=>x.id===id);if(r)fn(r);sv('reminders',L);showRemNote();if(cur==='reminders')renderReminders()}
+function upRem(id,fn){const L=ld('reminders',[]),r=L.find(x=>x.id===id);if(r)fn(r);if(r){r.done?nCancel(r):(r.at>Date.now()&&nSchedule(r))}sv('reminders',L);showRemNote();if(cur==='reminders')renderReminders()}
 $('#rmAdd').onclick=()=>{const t=$('#rm_t').value.trim(),at=new Date($('#rm_at').value).getTime();
  if(!t||isNaN(at)){toast('عنوان و زمان را وارد کنید');return}
- const L=ld('reminders',[]);L.push({id:uid(),title:t,note:$('#rm_n').value.trim(),at,done:false,fired:at<=Date.now()});sv('reminders',L);
+ const L=ld('reminders',[]);L.push({id:uid(),title:t,note:$('#rm_n').value.trim(),at,done:false,fired:at<=Date.now()});sv('reminders',L);if(at>Date.now())nSchedule(L[L.length-1]);
  $('#rm_t').value=$('#rm_n').value='';renderReminders();showRemNote();toast('یادآور ثبت شد ✓')};
-$('#rmPerm').onclick=async()=>{if(!('Notification' in window)){toast('این مرورگر اعلان را پشتیبانی نمی‌کند');return}const r=await Notification.requestPermission();toast(r==='granted'?'اعلان فعال شد ✓':'اعلان فعال نشد')};
+$('#rmPerm').onclick=async()=>{if(NATIVE){try{const r=await Capacitor.Plugins.LocalNotifications.requestPermissions();toast(r.display==='granted'?'اعلان فعال شد ✓':'اعلان فعال نشد')}catch(e){toast('خطا در فعال‌سازی اعلان')}return}if(!('Notification' in window)){notifHelp();return}const r=await Notification.requestPermission();toast(r==='granted'?'اعلان فعال شد ✓':'اعلان فعال نشد')};
 $('#rmList').onclick=e=>{const b=e.target.closest('button');if(!b)return;const D=b.dataset;
  if(D.rd)upRem(D.rd,r=>{r.done=!r.done});
- if(D.rx)ask('این یادآور حذف شود؟',()=>{sv('reminders',ld('reminders',[]).filter(x=>x.id!==D.rx));renderReminders();showRemNote()});
- if(D.rc){const r=ld('reminders',[]).find(x=>x.id===D.rc);if(r){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([icsOf(r)],{type:'text/calendar'}));a.download='reminder.ics';a.click();toast('فایل تقویم دریافت شد؛ آن را باز کنید')}}};
+ if(D.rx)ask('این یادآور حذف شود؟',()=>{const r0=ld('reminders',[]).find(x=>x.id===D.rx);if(r0)nCancel(r0);sv('reminders',ld('reminders',[]).filter(x=>x.id!==D.rx));renderReminders();showRemNote()});
+ if(D.rc){const r=ld('reminders',[]).find(x=>x.id===D.rc);if(r){saveFile(new Blob([icsOf(r)],{type:'text/calendar'}),'reminder.ics');toast('فایل تقویم را باز کنید')}}};
 function showRemNote(){const end=new Date();end.setHours(23,59,59,999);const n=ld('reminders',[]).filter(r=>!r.done&&r.at<=end.getTime()).length;
  $('#remNote').innerHTML=n?`<div class="banner b-try">⏰ ${fa(n)} کار برای امروز یا عقب‌افتاده <button class="btn sm" data-go="reminders" style="margin-right:8px">مشاهده</button></div>`:''}
 function fireRem(r){
@@ -825,6 +875,8 @@ function fireRem(r){
 function chkRem(){const L=ld('reminders',[]);let ch=false;L.forEach(r=>{if(!r.done&&!r.fired&&r.at<=Date.now()){r.fired=true;ch=true;fireRem(r)}});if(ch){sv('reminders',L);showRemNote()}}
 setInterval(chkRem,20000);setTimeout(chkRem,1500);showRemNote();
 
+function notifHelp(){modal('<h3>اعلان در این مرورگر کار نمی‌کند</h3><p style="line-height:2">این مرورگر (یا پنجره‌ی داخل برنامه‌ای مثل تلگرام و کلود) اعلان را پشتیبانی نمی‌کند. راه‌حل‌ها:<br>۱) برنامه را در <b>Chrome</b> باز کنید، یا نسخه‌ی اندروید (APK) را نصب کنید.<br>۲) روی هر یادآور دکمه‌ی «📅 تقویم گوشی» را بزنید تا آلارم واقعی در تقویم گوشی ساخته شود.<br>تا وقتی برنامه باز است، پنجره‌ی یادآور همیشه نمایش داده می‌شود.</p><button class="btn w full" onclick="closeModal()">متوجه شدم</button>')}
+
 /* ========= هشدار پشتیبان‌گیری (هر ۵ روز) ========= */
 function bkAlert(){
  const has=ld('invoices',[]).length+ld('customers',[]).length+ld('products',[]).length>0,last=+localStorage.getItem('last_backup')||0,today=dk(Date.now());
@@ -834,18 +886,11 @@ function bkAlert(){
 }
 setTimeout(bkAlert,1500);
 
-/* ========= پیام نصب هنگام ورود (PWA / WebAPK) ========= */
-let dip=null;
-const isStandalone=()=>matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;
-function hideInst(){$('#instBar').style.display='none'}
-function showInst(){if(isStandalone()||top!==self||location.protocol!=='https:'||Date.now()<(+localStorage.getItem('inst_snz')||0))return;$('#instBar').style.display='flex'}
-addEventListener('beforeinstallprompt',e=>{e.preventDefault();dip=e;showInst()});
-addEventListener('appinstalled',()=>{hideInst();toast('برنامه نصب شد ✓')});
-$('#instGo').onclick=async()=>{if(dip){try{dip.prompt();const r=await dip.userChoice;dip=null;if(r.outcome==='accepted')hideInst();return}catch(e){dip=null}}$('#installBtn').click()};
-$('#instLater').onclick=()=>{localStorage.setItem('inst_snz',String(Date.now()+3*864e5));hideInst()};
-setTimeout(showInst,1500);
 /* میانبرهای برنامه: ?go=invoice | notes | reminders */
 {const gp=new URLSearchParams(location.search).get('go');if(gp&&$('#p-'+gp))setTimeout(()=>go(gp),400)}
+
+/* نوار پایین: صفحه اصلی (راست) و بازگشت (چپ) */
+$$('.page').forEach(p=>{if(p.id!=='p-home'&&!p.querySelector('.bbar'))p.insertAdjacentHTML('beforeend','<div class="bbar"><button class="btn sm" data-home>🏠 صفحه اصلی</button><button class="btn sm w" data-back>‹ بازگشت</button></div>')});
 
 /* ثبت Service Worker برای نصب (PWA/APK) - فقط روی HTTPS */
 if('serviceWorker' in navigator&&location.protocol==='https:')addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));

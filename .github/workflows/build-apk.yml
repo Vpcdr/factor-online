@@ -1,4 +1,3 @@
-
 name: Build Android APK
 
 # اجرای دستی: Actions ← Build Android APK ← Run workflow
@@ -94,7 +93,7 @@ jobs:
         run: |
           convert icon-512-maskable.png -resize 1024x1024 assets/icon-only.png
           convert -size 2732x2732 xc:'#F5F1E8' \( icon-512.png -resize 700x700 \) -gravity center -composite assets/splash.png
-          npx @capacitor/assets generate --android --iconBackgroundColor '#0F4C3C' --iconBackgroundColorDark '#0F4C3C' --splashBackgroundColor '#F5F1E8' --splashBackgroundColorDark '#F5F1E8'
+          npx @capacitor/assets generate --android --iconBackgroundColor '#2A0A5E' --iconBackgroundColorDark '#2A0A5E' --splashBackgroundColor '#F5F1E8' --splashBackgroundColorDark '#F5F1E8'
 
       - name: Sync Android project
         run: npx cap sync android
@@ -120,4 +119,4 @@ jobs:
         with:
           tag_name: v${{ env.APP_VERSION }}
           name: فاکتور آنلاین ${{ env.APP_VERSION }}
-          files: factor-online.apk 
+          files: factor-online.apk
